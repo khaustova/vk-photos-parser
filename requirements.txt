@@ -1,0 +1,6 @@
+pillow==10.3.0
+python-dotenv==1.0.1
+requests==2.32.0
+selenium==4.21.0
+urllib3==2.2.1
+vk-api==11.9.9
