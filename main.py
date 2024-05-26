@@ -19,27 +19,26 @@ class Parser():
         
     def parsing(self, owner_id=-220740378):
         images_folder = 'images'
+        
         if not os.path.exists(images_folder):
             os.makedirs(images_folder)
+            
         path = os.getcwd() + '/' + images_folder
         
         while True:
             images = self.vk.photos.get(owner_id=owner_id, album_id='wall', photo_sizes=1, count=1000, offset=self.offset)
+            
             for image in images['items']:
                 max_size_photo = sorted(image['sizes'], key=lambda dict: dict['height'])
                 url = max_size_photo[-1]['url']
                 name = f'{path}/{self.count}.jpg' 
                 urllib.request.urlretrieve(url, name)
                 self.count += 1
+                
             self.offset += 1000
             if self.offset >= images['count']:
                 break
-            
 
-    
-        # with open('data.json', 'w') as fp:
-        #     fp.write(json.dumps(photos))
-        
 
 def main():
     parser = Parser()
