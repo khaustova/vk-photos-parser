@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>333</width>
+    <height>165</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(225, 233, 251, 255), stop:1 rgba(220, 220, 220, 255));</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_define_count">
+       <property name="text">
+        <string>Общее количество фотографий на стене группы:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_count">
+       <property name="styleSheet">
+        <string notr="true">font-weight: bold;
+font-size: 11pt;</string>
+       </property>
+       <property name="text">
+        <string>100</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_select_photo">
+       <property name="text">
+        <string>Определите  количество загружаемых фотографий:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="combo_box_select_photos">
+       <property name="styleSheet">
+        <string notr="true">QComboBox {
+font-size: 10pt;
+padding: 5px;
+selection-background-color: transparent;
+}
+</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <item>
+        <property name="text">
+         <string>Все</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Последние</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Первые</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="line_edit_count">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>21</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>21</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+background-color: white;
+border: 1px solid black;
+padding: 1px;
+}
+
+QLineEdit::focus {
+background-color: white;
+border: 1px solid rgb(21, 148, 194);
+padding: 1px;
+}
+
+QLineEdit::disabled {
+background-color: transparent;
+border: 1px solid rgba(0, 0, 0, 60)
+}
+
+
+
+</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_save">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+background-color: rgb(70, 130, 180);
+color: white;
+border: 1px solid black;
+padding: 3px 3px;
+}
+
+QPushButton:hover {
+background-color: rgb(100, 152, 195);
+}
+
+QPushButton:pressed {
+background-color: rgba(70, 130, 180 90);
+}</string>
+       </property>
+       <property name="text">
+        <string>Сохранить</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
