@@ -1,4 +1,5 @@
 images
 .venv
 .env
+parser.db
 __pycache__
