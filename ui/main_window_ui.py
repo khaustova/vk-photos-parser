@@ -18,22 +18,22 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QMainWindow, QPushButton,
     QSizePolicy, QVBoxLayout, QWidget)
-import icons_rc
+import ui.icons_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(370, 215)
-        MainWindow.setMinimumSize(QSize(370, 215))
-        MainWindow.setMaximumSize(QSize(370, 215))
+        MainWindow.resize(390, 232)
+        MainWindow.setMinimumSize(QSize(390, 215))
+        MainWindow.setMaximumSize(QSize(390, 232))
         MainWindow.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(225, 233, 251, 255), stop:1 rgba(220, 220, 220, 255));")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_5 = QVBoxLayout(self.centralwidget)
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(6, 0, 6, 4)
+        self.verticalLayout_5.setContentsMargins(6, 6, 6, 4)
         self.params_frame = QFrame(self.centralwidget)
         self.params_frame.setObjectName(u"params_frame")
         self.verticalLayout_4 = QVBoxLayout(self.params_frame)
@@ -48,6 +48,7 @@ class Ui_MainWindow(object):
 "background-color: rgba(255, 255, 255, 80);\n"
 "border: 1px solid black;\n"
 "padding: 3px 3px;\n"
+"height: 17px;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -107,7 +108,8 @@ class Ui_MainWindow(object):
         self.label_select_sources.setObjectName(u"label_select_sources")
         self.label_select_sources.setMinimumSize(QSize(0, 0))
         self.label_select_sources.setStyleSheet(u"background-color: transparent;\n"
-"padding-top: 2px;")
+"padding-top: 1px;\n"
+"width: 210px;")
         self.label_select_sources.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.horizontalLayout_6.addWidget(self.label_select_sources)
@@ -207,11 +209,15 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
         self.line_edit_select_path = QLineEdit(self.params_frame)
         self.line_edit_select_path.setObjectName(u"line_edit_select_path")
+        self.line_edit_select_path.setEnabled(False)
         self.line_edit_select_path.setMinimumSize(QSize(0, 21))
-        self.line_edit_select_path.setStyleSheet(u"background-color: white;\n"
+        self.line_edit_select_path.setStyleSheet(u"QLineEdit {\n"
+"background-color: white;\n"
 "border: 1px solid black;\n"
 "border-right: none;\n"
-"padding: 1px;")
+"padding: 1px;\n"
+"height: 21px;\n"
+"}")
 
         self.horizontalLayout_5.addWidget(self.line_edit_select_path)
 
@@ -228,7 +234,8 @@ class Ui_MainWindow(object):
         self.button_select_path.setStyleSheet(u"QPushButton {\n"
 "background-color: rgba(255, 255, 255, 80);\n"
 "border: 1px solid black;\n"
-"padding: 3px 3px;\n"
+"padding: 3px;\n"
+"height: 17px;\n"
 "width: 55px;\n"
 "}\n"
 "\n"
@@ -259,6 +266,7 @@ class Ui_MainWindow(object):
 "color: white;\n"
 "border: 1px solid black;\n"
 "padding: 3px 3px;\n"
+"height: 17px;\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -266,7 +274,7 @@ class Ui_MainWindow(object):
 "}\n"
 "\n"
 "QPushButton:pressed {\n"
-"background-color: rgba(70, 130, 180 90);\n"
+"background-color: rgba(70, 130, 180, 90);\n"
 "}")
 
         self.verticalLayout_3.addWidget(self.button_parse)
