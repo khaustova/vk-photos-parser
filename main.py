@@ -5,13 +5,11 @@ import urllib.request
 import ssl 
 import requests
 from PySide6 import QtWidgets
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from connection import Connection
 from parsing import Parser
 from ui.main_window_ui import Ui_MainWindow
 from ui import change_token_window_ui, setting_album_window_ui, setting_wall_window_ui
-
-
 
 
 class MainWindow(QMainWindow):
@@ -36,18 +34,19 @@ class MainWindow(QMainWindow):
         self.ui.button_add_token.clicked.connect(self.open_token_window)
         self.ui.button_setting_wall.clicked.connect(self.open_wall_settings_window)
         self.ui.button_setting_album.clicked.connect(self.open_album_settings_window)
+        self.ui.button_select_path.clicked.connect(self.select_path)
         
         self.check_token()
         
     def check_token(self):
-        token = self.conn.get_token()
-        is_true_token = self.parser.check_token_url(token)
+        is_true_token = self.parser.check_token_url(self.token)
         
         if is_true_token:
-            self.ui.label_token_info.setText("Токен действителен")
+            self.ui.label_token_info.setText("\u2713 Токен действителен")
+            self.ui.label_token_info.setStyleSheet('color: green')
         else:
-            self.ui.label_token_info.setText("Токен не действителен!")
-        
+            self.ui.label_token_info.setText("\u2717 Токен не действителен!")
+            self.ui.label_token_info.setStyleSheet('color: red')
         
     def open_token_window(self):
         self.token_window = QtWidgets.QDialog()
@@ -61,29 +60,57 @@ class MainWindow(QMainWindow):
         client_id = self.token_ui.line_edit_client_id.text()
         self.token_ui.button_get_token.clicked.connect(lambda: self.parser.get_token_url(client_id))
         self.token_ui.button_save.clicked.connect(self.save_token_data)
-        
-        
+          
     def save_token_data(self):
         client_id = self.token_ui.line_edit_client_id.text()
-        token = self.token_ui.line_edit_token.text()
+        self.token = self.token_ui.line_edit_token.text()
         self.conn.update_client_id(client_id)
-        self.conn.update_token(token)
+        self.conn.update_token(self.token)
         
         self.token_window.close()
         self.check_token()
+        
+    def select_path(self):
+        path = QFileDialog.getExistingDirectory(
+            self,
+            "Выберите папку для загрузки"
+            )
+        self.ui.line_edit_select_path.setText(path)
 
     def open_wall_settings_window(self):
         self.wall_window = QtWidgets.QDialog()
-        self.wall_ui = setting_album_window_ui.Ui_Dialog()
+        self.wall_ui = setting_wall_window_ui.Ui_Dialog()
         self.wall_ui.setupUi(self.wall_window)
-        self.wall_window.show()
         
+        group_id = self.ui.line_edit_group_id.text()
+        if self.parser.check_group_id(self.token, group_id):
+            self.wall_window.show()
+        else:
+            QMessageBox.critical(
+            self,
+            "Ошибка ID группы",
+            "Проверьте правильность введённого ID группы",
+            buttons=QMessageBox.Ok,
+            defaultButton=QMessageBox.Ok,
+        )
+
     def open_album_settings_window(self):
         self.album_window = QtWidgets.QDialog()
-        self.album_ui = setting_wall_window_ui.Ui_Dialog()
+        self.album_ui = setting_album_window_ui.Ui_Dialog()
         self.album_ui.setupUi(self.album_window)
-        self.album_window.show()
         
+        group_id = self.ui.line_edit_group_id.text()
+        if self.parser.check_group_id(self.token, group_id):
+            self.album_window.show()
+        else:
+            QMessageBox.critical(
+            self,
+            "Ошибка ID группы",
+            "Проверьте правильность введённого ID группы",
+            buttons=QMessageBox.Ok,
+            defaultButton=QMessageBox.Ok,
+        )
+
     def parsing(self):
         images_folder = 'images'
         
