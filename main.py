@@ -4,7 +4,6 @@ import sys
 import urllib.request
 import ssl 
 import requests
-from configuration import config
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow
 from connection import Connection
@@ -12,7 +11,7 @@ from parsing import Parser
 from ui.main_window_ui import Ui_MainWindow
 from ui import change_token_window_ui, setting_album_window_ui, setting_wall_window_ui
 
-ssl._create_default_https_context = ssl._create_unverified_context
+
 
 
 class MainWindow(QMainWindow):
@@ -23,7 +22,7 @@ class MainWindow(QMainWindow):
         self.parser = Parser()
         self.conn = Connection()
         
-        self.token = config.token.get_secret_value()
+        self.token = self.conn.get_token()
         
         self.vk_session = vk_api.VkApi(token=self.token)
         self.vk = self.vk_session.get_api()
@@ -38,11 +37,16 @@ class MainWindow(QMainWindow):
         self.ui.button_setting_wall.clicked.connect(self.open_wall_settings_window)
         self.ui.button_setting_album.clicked.connect(self.open_album_settings_window)
         
-        #self.reload_token()
+        self.check_token()
         
-    def reload_token_data(self):
+    def check_token(self):
         token = self.conn.get_token()
-        print(token)
+        is_true_token = self.parser.check_token_url(token)
+        
+        if is_true_token:
+            self.ui.label_token_info.setText("Токен действителен")
+        else:
+            self.ui.label_token_info.setText("Токен не действителен!")
         
         
     def open_token_window(self):
@@ -54,7 +58,10 @@ class MainWindow(QMainWindow):
         self.token_ui.line_edit_token.setText(self.conn.get_token())
         self.token_ui.line_edit_client_id.setText(self.conn.get_client_id())
         
+        client_id = self.token_ui.line_edit_client_id.text()
+        self.token_ui.button_get_token.clicked.connect(lambda: self.parser.get_token_url(client_id))
         self.token_ui.button_save.clicked.connect(self.save_token_data)
+        
         
     def save_token_data(self):
         client_id = self.token_ui.line_edit_client_id.text()
@@ -63,8 +70,8 @@ class MainWindow(QMainWindow):
         self.conn.update_token(token)
         
         self.token_window.close()
+        self.check_token()
 
-        
     def open_wall_settings_window(self):
         self.wall_window = QtWidgets.QDialog()
         self.wall_ui = setting_album_window_ui.Ui_Dialog()

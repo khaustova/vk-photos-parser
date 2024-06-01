@@ -36,7 +36,7 @@ class Connection:
         sql_query = "UPDATE parser SET Client_ID=? WHERE ID=1"  
         self.update_value(sql_query, client_id)
         
-    def get_value(self, sql_query, index):
+    def get_value(self, sql_query):
         query = QtSql.QSqlQuery()
         query.exec(sql_query)
 
@@ -45,14 +45,14 @@ class Connection:
             insert_query.exec('INSERT INTO parser (ID, Token, Client_ID) VALUES (1, "", "")')
             return ""
         else:
-            return query.value(index)
+            return query.value(0)
         
     def get_token(self):
         sql_query = "SELECT Token FROM parser WHERE ID=1"
-        return self.get_value(sql_query, 0)
+        return self.get_value(sql_query)
         
     def get_client_id(self):
         sql_query = "SELECT Client_ID FROM parser WHERE ID=1"
-        return self.get_value(sql_query, 0)
+        return self.get_value(sql_query)
 
         
