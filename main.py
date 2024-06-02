@@ -27,11 +27,13 @@ class MainWindow(QMainWindow):
         
         self.count = 0
         self.offset = 0
-        self.amount = 0
-        self.selected_amount = None
+        self.wall_photos_count = {"type": "Все", "count": None}
         
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        
+        
+        self.ui.check_box_wall.checkStateChanged.connect(self.change_wall_settings_button_state)
         
         self.ui.button_add_token.clicked.connect(self.open_token_window)
         self.ui.button_setting_wall.clicked.connect(self.open_wall_settings_window)
@@ -39,6 +41,14 @@ class MainWindow(QMainWindow):
         self.ui.button_select_path.clicked.connect(self.select_path)
         
         self.check_token()
+        
+    def change_wall_settings_button_state(self):
+        if self.ui.check_box_wall.isChecked():
+            self.ui.button_setting_wall.setEnabled(True)
+        else:
+            self.ui.button_setting_wall.setDisabled(True)
+            
+        
         
     def open_token_window(self):
         """ Открывает окно настройки токена
@@ -112,45 +122,44 @@ class MainWindow(QMainWindow):
             self.wall_window.show()
             
             self.wall_ui.label_count.setText(self.parser.get_total_photos(self.ui.line_edit_group_id))
-            self.wall_ui.combo_box_select_photos.currentTextChanged.connect(self.get_amount_of_photos)
-            self.wall_ui.button_save.clicked.connect(self.save_amount_of_photos)
+            self.wall_ui.combo_box_select_photos.currentTextChanged.connect(self.get_wall_photos_count)
+            self.wall_ui.button_save.clicked.connect(self.save_wall_photos_count)
             
         else:
             QMessageBox.critical(
             self,
             "Ошибка ID группы",
-            "Проверьте правильность введённого ID группы",
+            "Проверьте правильность введённого ID группы и действительность токена",
             buttons=QMessageBox.Ok,
             defaultButton=QMessageBox.Ok,
         )
             
-    def get_amount_of_photos(self):
+    def get_wall_photos_count(self):
         """ Получает параметры настройки количества загружаемых со стены изображений
         Если в ComboBox были выбраны поля "Последние" или "Первые" то для ввода
         количества фотографий становится доступен виджет lineEdit  
         """
         
-        self.selected_amount = self.wall_ui.combo_box_select_photos.currentText()
-        if self.selected_amount == "Последние" or self.selected_amount == "Первые":
+        self.wall_photos_count["type"] = self.wall_ui.combo_box_select_photos.currentText()
+        if self.wall_photos_count["type"] == "Последние" or self.wall_photos_count["type"] == "Первые":
             self.wall_ui.line_edit_count.setEnabled(True)
         else:
             self.wall_ui.line_edit_count.setDisabled(True)
             
-    def save_amount_of_photos(self):
+    def save_wall_photos_count(self):
         """ Сохраняет параметры настройки количества загружаемых со стены изображений
         в соответствующие атрибуты класса
         """
         
         if self.wall_ui.line_edit_count.isEnabled():
-            self.amount = self.wall_ui.line_edit_count.text()
-            if not self.amount.isdigit():
+            self.wall_photos_count["count"] = self.wall_ui.line_edit_count.text()
+            if not self.wall_photos_count["count"].isdigit():
                 frame = self.wall_ui.wall_frame
                 info_label = QtWidgets.QLabel(frame)
                 info_label.setText("Введённое значение должно быть числом")
                 info_label.setStyleSheet("color: red")
                 info_label.setGeometry(10, 10, 200, 300)
             else:
-                print(self.selected_amount, self.amount)
                 self.wall_window.close()
         
     def open_album_settings_window(self):
