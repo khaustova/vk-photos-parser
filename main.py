@@ -1,9 +1,5 @@
 import vk_api
-import os
 import sys
-import urllib.request
-import ssl 
-import requests
 from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from connection import Connection
@@ -72,7 +68,7 @@ class MainWindow(QMainWindow):
         self.token_ui.line_edit_token.setText(self.conn.get_token())
         self.token_ui.line_edit_client_id.setText(self.conn.get_client_id())
         
-        app_url = "1. Перейдите на <a href=\"https://dev.vk.com/ru/admin/apps-list\" style='color:blue'>страницу управления приложениями</a>."
+        app_url = '1. Перейдите на <a href=\"https://dev.vk.com/ru/admin/apps-list\" style="color:blue">страницу управления приложениями</a>.'
         self.token_ui.label_step_1.setText(app_url)
         self.token_ui.label_step_1.setOpenExternalLinks(True)
         
@@ -88,10 +84,10 @@ class MainWindow(QMainWindow):
         
         if is_true_token:
             self.ui.label_token_info.setText("\u2713 Токен действителен")
-            self.ui.label_token_info.setStyleSheet('color: green')
+            self.ui.label_token_info.setStyleSheet("color: green")
         else:
             self.ui.label_token_info.setText("\u2717 Токен не действителен!")
-            self.ui.label_token_info.setStyleSheet('color: red')    
+            self.ui.label_token_info.setStyleSheet("color: red")    
 
     def save_token_data(self):
         """ Сохраняет токен и ID приложения в базу данных, при этом в базе 

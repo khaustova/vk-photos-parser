@@ -24,10 +24,10 @@ class ParserThread(QThread):
             photos = self.parser.parse_wall(self.group_id, self.count, self.offset)
             
             num = 0  
-            for photo in photos['items']:
-                max_size_photo = sorted(photo['sizes'], key=lambda dict: dict['height'])
-                url = max_size_photo[-1]['url']
-                name = f'{self.path}/{num}.jpg' 
+            for photo in photos["items"]:
+                max_size_photo = sorted(photo["sizes"], key=lambda dict: dict["height"])
+                url = max_size_photo[-1]["url"]
+                name = f"{self.path}/{num}.jpg" 
                 urllib.request.urlretrieve(url, name)
                 num += 1
                 self.progress_signal.emit(num)
