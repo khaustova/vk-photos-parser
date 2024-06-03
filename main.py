@@ -26,9 +26,11 @@ class MainWindow(QMainWindow):
         self.vk_session = vk_api.VkApi(token=self.token)
         self.vk = self.vk_session.get_api()
         
-        self.count = 0
-        self.offset = 0
-        self.wall_photos_count = {"type": "Все", "count": ""}
+        self.wall_photos_count = {
+            "type": "Все", 
+            "count": "", 
+        }
+        self.total_count = 0
         
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -48,6 +50,15 @@ class MainWindow(QMainWindow):
         self.ui.button_parse.clicked.connect(self.parse_photos)
         
         self.check_token()
+        
+    def change_settings_button_state(self, checkbox, button):
+        """ В зависимости от состояния чекбокса делает кнопку активной или неактивной
+        """
+        
+        if checkbox.isChecked():
+            button.setEnabled(True)
+        else:
+            button.setEnabled(False)
 
     def open_token_window(self):
         """ Открывает окно настройки токена
@@ -206,15 +217,20 @@ class MainWindow(QMainWindow):
         token = self.conn.get_token()
         checkbox_wall = self.ui.check_box_wall.isChecked()
         checkbox_album = self.ui.check_box_album.isChecked()
+        total_photos = self.parser.get_total_photos(self.ui.line_edit_group_id)
 
         try:
-            self.wall_photos_count["count"] = int(self.wall_photos_count["count"])
+            count = int(self.wall_photos_count["count"])
         except:
-            self.wall_photos_count["count"] = self.parser.get_total_photos(self.ui.line_edit_group_id)
+            count = total_photos
             
-        count = self.wall_photos_count["count"]    
+        self.total_count = count
+        offset = None
+        
+        if self.wall_photos_count["type"] == "Последние":
+            offset = int(total_photos) - int(count)
   
-        self.parser_thread = ParserThread(checkbox_wall, token, group_id, path, count)
+        self.parser_thread = ParserThread(checkbox_wall, token, group_id, path, count, offset)
         self.parser_thread.progress_signal.connect(self.update_parsing_info)
         self.parser_thread.finished_signal.connect(self.is_finish_parsing)
         self.parser_thread.start()
@@ -227,7 +243,7 @@ class MainWindow(QMainWindow):
         """ Выводит сообщение о процессе загрузки
         """
         
-        self.ui.label_info.setText("Идёт загрузка: " + str(value) + "/" + self.wall_photos_count["count"]) 
+        self.ui.label_info.setText("Идёт загрузка: " + str(value) + "/" + str(self.total_count)) 
         
     def stop_parsing(self):
         """ Останавливает парсинг изображений и выводит соответствующее сообщение 

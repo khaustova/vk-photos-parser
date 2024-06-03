@@ -70,8 +70,8 @@ class Parser:
         content = json.loads(response.content)
         return True if content.get('response') else False
     
-    def parse_wall(self, group_id, count):
-        photos = self.vk.photos.get(owner_id=-group_id, album_id='wall', photo_sizes=1, count=count)
+    def parse_wall(self, group_id, count, offset):
+        photos = self.vk.photos.get(owner_id=-group_id, album_id='wall', photo_sizes=1, count=count, offset=offset)
 
         return photos
     

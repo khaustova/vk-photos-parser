@@ -9,7 +9,7 @@ class ParserThread(QThread):
     progress_signal = Signal(int)
     finished_signal = Signal()
     
-    def __init__(self, checkbox_wall, token, group_id, path, count, parent=None):
+    def __init__(self, checkbox_wall, token, group_id, path, count, offset, parent=None):
         super(ParserThread, self).__init__(parent)
         self.parser = Parser(token)
                 
@@ -17,11 +17,11 @@ class ParserThread(QThread):
         self.group_id = group_id
         self.path = path
         self.count = count
+        self.offset = offset
 
-        
     def run(self):
         if self.checkbox_wall:
-            photos = self.parser.parse_wall(self.group_id, self.count)
+            photos = self.parser.parse_wall(self.group_id, self.count, self.offset)
             
             num = 0  
             for photo in photos['items']:
