@@ -8,6 +8,7 @@ from PySide6 import QtWidgets
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from connection import Connection
 from parsing import Parser
+from parsing_thread import ParserThread
 from ui.main_window_ui import Ui_MainWindow
 from ui import change_token_window_ui, setting_album_window_ui, setting_wall_window_ui
 
@@ -27,29 +28,32 @@ class MainWindow(QMainWindow):
         
         self.count = 0
         self.offset = 0
-        self.wall_photos_count = {"type": "Все", "count": None}
+        self.wall_photos_count = {"type": "Все", "count": ""}
         
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
-        
-        self.ui.check_box_wall.checkStateChanged.connect(self.change_wall_settings_button_state)
+        self.ui.check_box_wall.checkStateChanged.connect(lambda: self.change_settings_button_state(self.ui.check_box_wall, self.ui.button_wall_settings))
+        self.ui.check_box_album.checkStateChanged.connect(lambda: self.change_settings_button_state(self.ui.check_box_album, self.ui.button_album_settings))
         
         self.ui.button_add_token.clicked.connect(self.open_token_window)
-        self.ui.button_setting_wall.clicked.connect(self.open_wall_settings_window)
-        self.ui.button_setting_album.clicked.connect(self.open_album_settings_window)
+        self.ui.button_wall_settings.clicked.connect(self.open_wall_settings_window)
+        self.ui.button_album_settings.clicked.connect(self.open_album_settings_window)
         self.ui.button_select_path.clicked.connect(self.select_path)
+        
+        self.ui.button_parse.clicked.connect(self.parse_photos)
         
         self.check_token()
         
-    def change_wall_settings_button_state(self):
-        if self.ui.check_box_wall.isChecked():
-            self.ui.button_setting_wall.setEnabled(True)
+    def parsing_finished(self):
+        self.ui.label_info.setText("Загрузка успешно завершена")
+        
+    def change_settings_button_state(self, checkbox, button):
+        if checkbox.isChecked():
+            button.setEnabled(True)
         else:
-            self.ui.button_setting_wall.setDisabled(True)
-            
-        
-        
+            button.setDisabled(True)
+
     def open_token_window(self):
         """ Открывает окно настройки токена
         """
@@ -122,8 +126,14 @@ class MainWindow(QMainWindow):
             self.wall_window.show()
             
             self.wall_ui.label_count.setText(self.parser.get_total_photos(self.ui.line_edit_group_id))
-            self.wall_ui.combo_box_select_photos.currentTextChanged.connect(self.get_wall_photos_count)
-            self.wall_ui.button_save.clicked.connect(self.save_wall_photos_count)
+
+            self.wall_ui.combo_box_select_photos.setCurrentText(self.wall_photos_count["type"])
+            self.wall_ui.line_edit_count.setText(self.wall_photos_count["count"])
+            
+            self.wall_ui.combo_box_select_photos.currentTextChanged.connect(self.get_wall_settings)
+            self.wall_ui.button_save.clicked.connect(self.save_wall_settings)
+            
+            self.change_count_line_edit_state()
             
         else:
             QMessageBox.critical(
@@ -134,33 +144,39 @@ class MainWindow(QMainWindow):
             defaultButton=QMessageBox.Ok,
         )
             
-    def get_wall_photos_count(self):
+    def get_wall_settings(self):
         """ Получает параметры настройки количества загружаемых со стены изображений
         Если в ComboBox были выбраны поля "Последние" или "Первые" то для ввода
         количества фотографий становится доступен виджет lineEdit  
         """
         
         self.wall_photos_count["type"] = self.wall_ui.combo_box_select_photos.currentText()
+        self.change_count_line_edit_state()
+
+    def change_count_line_edit_state(self):
         if self.wall_photos_count["type"] == "Последние" or self.wall_photos_count["type"] == "Первые":
             self.wall_ui.line_edit_count.setEnabled(True)
         else:
             self.wall_ui.line_edit_count.setDisabled(True)
             
-    def save_wall_photos_count(self):
+    def save_wall_settings(self):
         """ Сохраняет параметры настройки количества загружаемых со стены изображений
         в соответствующие атрибуты класса
         """
         
         if self.wall_ui.line_edit_count.isEnabled():
             self.wall_photos_count["count"] = self.wall_ui.line_edit_count.text()
+            
             if not self.wall_photos_count["count"].isdigit():
                 frame = self.wall_ui.wall_frame
                 info_label = QtWidgets.QLabel(frame)
                 info_label.setText("Введённое значение должно быть числом")
                 info_label.setStyleSheet("color: red")
                 info_label.setGeometry(10, 10, 200, 300)
-            else:
-                self.wall_window.close()
+                
+                return
+            
+        self.wall_window.close()
         
     def open_album_settings_window(self):
         """ Открывает окно с настройками загрузки альбомов
@@ -181,7 +197,48 @@ class MainWindow(QMainWindow):
             buttons=QMessageBox.Ok,
             defaultButton=QMessageBox.Ok,
         )
+            
+    def parse_photos(self):
+        path = self.ui.line_edit_select_path.text()
+        group_id = int(self.ui.line_edit_group_id.text())
+        token = self.conn.get_token()
+        checkbox_wall = self.ui.check_box_wall.isChecked()
+        checkbox_album = self.ui.check_box_album.isChecked()
 
+        try:
+            self.wall_photos_count["count"] = int(self.wall_photos_count["count"])
+        except:
+            self.wall_photos_count["count"] = self.parser.get_total_photos(self.ui.line_edit_group_id)
+            
+        count = self.wall_photos_count["count"]    
+  
+        self.parser_thread = ParserThread(checkbox_wall, token, group_id, path, count)
+        self.parser_thread.progress_signal.connect(self.update_parsing_info)
+        self.parser_thread.finished_signal.connect(self.is_finish_parsing)
+        self.parser_thread.start()
+        
+        self.ui.button_parse.setText("Стоп")
+        self.ui.button_parse.clicked.disconnect(self.parse_photos)
+        self.ui.button_parse.clicked.connect(self.stop_parsing)
+                
+    def update_parsing_info(self, value):
+        self.ui.label_info.setText("Идёт загрузка: " + str(value) + "/" + self.wall_photos_count["count"]) 
+        
+    def stop_parsing(self):
+        self.parser_thread.terminate()
+        self.ui.label_info.setText("Загрузка остановлена!") 
+        
+        self.ui.button_parse.setText("Скачать")
+        self.ui.button_parse.clicked.disconnect(self.stop_parsing)
+        self.ui.button_parse.clicked.connect(self.parse_photos)
+        
+    def is_finish_parsing(self):
+        self.ui.label_info.setText("Загрузка завершена!") 
+        
+        self.ui.button_parse.setText("Скачать")
+        self.ui.button_parse.clicked.disconnect(self.stop_parsing)
+        self.ui.button_parse.clicked.connect(self.parse_photos)    
+              
     def parsing(self):
         images_folder = 'images'
         
