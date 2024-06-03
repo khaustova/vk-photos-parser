@@ -149,6 +149,10 @@ class MainWindow(QMainWindow):
         self.change_count_line_edit_state()
 
     def change_count_line_edit_state(self):
+        """ Делает активным поле ввода при выборе количества загружаемых 
+        со стены изображений и неактивным при выборе загрузки всех изображений  
+        """
+        
         if self.wall_photos_count["type"] == "Последние" or self.wall_photos_count["type"] == "Первые":
             self.wall_ui.line_edit_count.setEnabled(True)
         else:
