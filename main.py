@@ -33,8 +33,12 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
-        self.ui.check_box_wall.checkStateChanged.connect(lambda: self.change_settings_button_state(self.ui.check_box_wall, self.ui.button_wall_settings))
-        self.ui.check_box_album.checkStateChanged.connect(lambda: self.change_settings_button_state(self.ui.check_box_album, self.ui.button_album_settings))
+        self.ui.check_box_wall.checkStateChanged.connect(
+            lambda: self.change_settings_button_state(self.ui.check_box_wall, self.ui.button_wall_settings)
+        )
+        self.ui.check_box_album.checkStateChanged.connect(
+            lambda: self.change_settings_button_state(self.ui.check_box_album, self.ui.button_album_settings)
+        )
         
         self.ui.button_add_token.clicked.connect(self.open_token_window)
         self.ui.button_wall_settings.clicked.connect(self.open_wall_settings_window)
@@ -44,15 +48,6 @@ class MainWindow(QMainWindow):
         self.ui.button_parse.clicked.connect(self.parse_photos)
         
         self.check_token()
-        
-    def parsing_finished(self):
-        self.ui.label_info.setText("Загрузка успешно завершена")
-        
-    def change_settings_button_state(self, checkbox, button):
-        if checkbox.isChecked():
-            button.setEnabled(True)
-        else:
-            button.setDisabled(True)
 
     def open_token_window(self):
         """ Открывает окно настройки токена
@@ -199,6 +194,9 @@ class MainWindow(QMainWindow):
         )
             
     def parse_photos(self):
+        """ Парсит изображения в соответствии с переданными параметрами
+        """
+        
         path = self.ui.line_edit_select_path.text()
         group_id = int(self.ui.line_edit_group_id.text())
         token = self.conn.get_token()
@@ -222,9 +220,15 @@ class MainWindow(QMainWindow):
         self.ui.button_parse.clicked.connect(self.stop_parsing)
                 
     def update_parsing_info(self, value):
+        """ Выводит сообщение о процессе загрузки
+        """
+        
         self.ui.label_info.setText("Идёт загрузка: " + str(value) + "/" + self.wall_photos_count["count"]) 
         
     def stop_parsing(self):
+        """ Останавливает парсинг изображений и выводит соответствующее сообщение 
+        """
+        
         self.parser_thread.terminate()
         self.ui.label_info.setText("Загрузка остановлена!") 
         
@@ -233,34 +237,15 @@ class MainWindow(QMainWindow):
         self.ui.button_parse.clicked.connect(self.parse_photos)
         
     def is_finish_parsing(self):
-        self.ui.label_info.setText("Загрузка завершена!") 
+        """ Выводит сообщение об успешной окончании загрузки
+        """
+        
+        self.ui.label_info.setText("Загрузка успешно завершена!") 
         
         self.ui.button_parse.setText("Скачать")
         self.ui.button_parse.clicked.disconnect(self.stop_parsing)
         self.ui.button_parse.clicked.connect(self.parse_photos)    
-              
-    def parsing(self):
-        images_folder = 'images'
         
-        if not os.path.exists(images_folder):
-            os.makedirs(images_folder)
-            
-        path = os.getcwd() + '/' + images_folder
-        print(self.token)
-        while True:
-            images = self.vk.photos.get(owner_id=-220740378, album_id='wall', photo_sizes=1, count=1000, offset=self.offset)
-            
-            for image in images['items']:
-                max_size_photo = sorted(image['sizes'], key=lambda dict: dict['height'])
-                url = max_size_photo[-1]['url']
-                name = f'{path}/{self.count}.jpg' 
-                urllib.request.urlretrieve(url, name)
-                self.count += 1
-                
-            self.offset += 1000
-            if self.offset >= images['count']:
-                break
-
 
 def main():
     app = QApplication()
