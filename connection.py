@@ -11,12 +11,22 @@ class Connection:
         db.setDatabaseName('parser.db')
 
         if not db.open():
-            QtWidgets.QMessageBox.critical(None, "Не получается открыть базу данных", QtWidgets.QMessageBox.Cancel)
+            QtWidgets.QMessageBox.critical(
+                self,
+                "Ошибка",
+                "Произошла ошибка открытия базы данных.",
+                buttons=QtWidgets.QMessageBox.Ok,
+                defaultButton=QtWidgets.QMessageBox.Ok,
+            )
             return False
 
         query = QtSql.QSqlQuery()
         query.exec("CREATE TABLE IF NOT EXISTS parser (ID integer primary key AUTOINCREMENT, "
                    "Token VARCHAR(100), Client_ID VARCHAR(100))")
+        
+        query.exec("SELECT Token FROM parser WHERE ID=1")
+        if not query.first():
+            query.exec('INSERT INTO parser (ID, Token, Client_ID) VALUES (1, "", "")')
     
         return True
     
