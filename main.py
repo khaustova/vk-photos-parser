@@ -1,7 +1,7 @@
 import vk_api
 import sys
-from PySide6 import QtWidgets
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
+from PySide6 import QtWidgets, QtCore
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QCheckBox, QScrollArea, QVBoxLayout
 from connection import Connection
 from parsing import Parser
 from parsing_thread import ParserThread
@@ -19,13 +19,11 @@ class MainWindow(QMainWindow):
         
         self.parser = Parser(token=self.token)
         
-        self.vk_session = vk_api.VkApi(token=self.token)
-        self.vk = self.vk_session.get_api()
-        
         self.wall_photos_count = {
             "type": "Все", 
             "count": "", 
         }
+        self.checked_albums = []
         self.total_count = 0
         
         self.ui = Ui_MainWindow()
@@ -80,15 +78,15 @@ class MainWindow(QMainWindow):
         Для проверки токена делается тестовый запрос к VK API
         """
         
-        is_true_token = self.parser.check_token_url(self.token)
+        is_true_token = self.parser.check_token_url()
         
         if is_true_token:
             self.ui.label_token_info.setText("\u2713 Токен действителен")
             self.ui.label_token_info.setStyleSheet("color: green")
         else:
             self.ui.label_token_info.setText("\u2717 Токен не действителен!")
-            self.ui.label_token_info.setStyleSheet("color: red")    
-
+            self.ui.label_token_info.setStyleSheet("color: red")
+            
     def save_token_data(self):
         """ Сохраняет токен и ID приложения в базу данных, при этом в базе 
         гарантированно хранится только одна запись с данными
@@ -124,7 +122,7 @@ class MainWindow(QMainWindow):
         self.wall_ui.setupUi(self.wall_window)
         
         group_id = self.ui.line_edit_group_id.text()
-        if self.parser.check_group_id(self.token, group_id):
+        if self.parser.check_group_id(group_id):
             self.wall_window.show()
             
             self.wall_ui.label_count.setText(self.parser.get_total_photos(self.ui.line_edit_group_id))
@@ -193,8 +191,41 @@ class MainWindow(QMainWindow):
         self.album_ui.setupUi(self.album_window)
         
         group_id = self.ui.line_edit_group_id.text()
-        if self.parser.check_group_id(self.token, group_id):
+        if self.parser.check_group_id(group_id):
             self.album_window.show()
+
+            group_id = int(self.ui.line_edit_group_id.text())
+            albums = self.parser.get_albums(group_id)
+            
+            checkboxes_albums_list = []
+            for name in albums.keys():
+                checkboxes_albums_list.append(name)
+            
+            layout = self.album_ui.layout
+            scroll_widget = self.album_ui.scrollAreaWidgetContents
+            scroll_area = self.album_ui.scrollArea
+            
+            scroll_area.setWidgetResizable(True)
+            scroll_area.setWidget(scroll_widget)
+            layout = QVBoxLayout(scroll_widget)
+
+            checkboxes = []
+            num = 1
+            for value in checkboxes_albums_list:
+                checkbox = QCheckBox(value)
+                
+                album_id = albums[checkbox.text()]["id"]
+                
+                if album_id in self.checked_albums:
+                    checkbox.setChecked(True)
+                
+                checkbox.setObjectName(f'checkbox_album_{num + 1}')
+                layout.addWidget(checkbox)
+                checkboxes.append(checkbox)
+                num += 1
+                
+            self.album_ui.button_save.clicked.connect(lambda: self.save_albums_settins(checkboxes, albums))
+            
         else:
             QMessageBox.critical(
             self,
@@ -203,6 +234,12 @@ class MainWindow(QMainWindow):
             buttons=QMessageBox.Ok,
             defaultButton=QMessageBox.Ok,
         )
+            
+    def save_albums_settins(self, checkboxes, albums):
+        for checkbox in checkboxes:
+            if checkbox.isChecked():
+                self.checked_albums.append(albums[checkbox.text()]["id"])
+            self.album_window.close()
             
     def parse_photos(self):
         """ Парсит изображения в соответствии с переданными параметрами
