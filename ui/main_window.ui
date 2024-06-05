@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>439</width>
+    <width>433</width>
     <height>252</height>
    </rect>
   </property>
@@ -48,7 +48,7 @@ font-size: 12px;</string>
      <number>6</number>
     </property>
     <item>
-     <widget class="QTabWidget" name="params_tabWidget">
+     <widget class="QTabWidget" name="params_tabwidget">
       <property name="styleSheet">
        <string notr="true">QTabWidget::pane {
   border: 1px solid lightgray;
@@ -70,7 +70,7 @@ QTabBar::tab:selected {
       <property name="currentIndex">
        <number>1</number>
       </property>
-      <widget class="QWidget" name="params_tabWidgetPage1" native="true">
+      <widget class="QWidget" name="page_photos" native="true">
        <property name="styleSheet">
         <string notr="true">border: none;
 background: white;</string>
@@ -526,7 +526,7 @@ background-color: #5181b8;
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_3">
+      <widget class="QWidget" name="page_authorization">
        <property name="styleSheet">
         <string notr="true">border: none;
 background: white;</string>
