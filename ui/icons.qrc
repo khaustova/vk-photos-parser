@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icon">
-    <file>icons/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg</file>
+    <file>icons/check.png</file>
+    <file>icons/settings.svg</file>
   </qresource>
 </RCC>

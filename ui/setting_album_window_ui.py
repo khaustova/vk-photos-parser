@@ -15,34 +15,50 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QLabel, QListWidget,
-    QListWidgetItem, QPushButton, QSizePolicy, QVBoxLayout,
+from PySide6.QtWidgets import (QApplication, QDialog, QHBoxLayout, QLabel,
+    QPushButton, QScrollArea, QSizePolicy, QVBoxLayout,
     QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(400, 158)
+        Dialog.resize(400, 297)
         Dialog.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(225, 233, 251, 255), stop:1 rgba(220, 220, 220, 255));")
-        self.verticalLayout_2 = QVBoxLayout(Dialog)
+        self.horizontalLayout = QHBoxLayout(Dialog)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout = QVBoxLayout()
-        self.verticalLayout.setObjectName(u"verticalLayout")
         self.label_select_albums = QLabel(Dialog)
         self.label_select_albums.setObjectName(u"label_select_albums")
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.label_select_albums.sizePolicy().hasHeightForWidth())
+        self.label_select_albums.setSizePolicy(sizePolicy)
+        self.label_select_albums.setStyleSheet(u"height: 20px;")
 
-        self.verticalLayout.addWidget(self.label_select_albums)
+        self.verticalLayout_2.addWidget(self.label_select_albums)
 
-        self.list_widgets = QListWidget(Dialog)
-        self.list_widgets.setObjectName(u"list_widgets")
-        self.list_widgets.setStyleSheet(u"background-color: transparent;\n"
-"border: none;")
+        self.scrollArea = QScrollArea(Dialog)
+        self.scrollArea.setObjectName(u"scrollArea")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 378, 229))
+        self.verticalLayoutWidget = QWidget(self.scrollAreaWidgetContents)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(0, 0, 381, 231))
+        self.layout = QVBoxLayout(self.verticalLayoutWidget)
+        self.layout.setObjectName(u"layout")
+        self.layout.setContentsMargins(0, 0, 0, 0)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.verticalLayout.addWidget(self.list_widgets)
+        self.verticalLayout_2.addWidget(self.scrollArea)
 
         self.button_save = QPushButton(Dialog)
         self.button_save.setObjectName(u"button_save")
+        self.button_save.setCursor(QCursor(Qt.PointingHandCursor))
         self.button_save.setStyleSheet(u"QPushButton {\n"
 "background-color: rgb(70, 130, 180);\n"
 "color: white;\n"
@@ -55,13 +71,13 @@ class Ui_Dialog(object):
 "}\n"
 "\n"
 "QPushButton:pressed {\n"
-"background-color: rgba(70, 130, 180 90);\n"
+"background-color: rgba(70, 130, 180, 90);\n"
 "}")
 
-        self.verticalLayout.addWidget(self.button_save)
+        self.verticalLayout_2.addWidget(self.button_save)
 
 
-        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.horizontalLayout.addLayout(self.verticalLayout_2)
 
 
         self.retranslateUi(Dialog)

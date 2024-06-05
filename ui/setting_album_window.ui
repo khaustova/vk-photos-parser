@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>158</height>
+    <height>297</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,26 +16,58 @@
   <property name="styleSheet">
    <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(225, 233, 251, 255), stop:1 rgba(220, 220, 220, 255));</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
       <widget class="QLabel" name="label_select_albums">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">height: 20px;</string>
+       </property>
        <property name="text">
         <string>Выберите альбомы для загрузки:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QListWidget" name="list_widgets">
-       <property name="styleSheet">
-        <string notr="true">background-color: transparent;
-border: none;</string>
+      <widget class="QScrollArea" name="scrollArea">
+       <property name="widgetResizable">
+        <bool>true</bool>
        </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>378</width>
+          <height>229</height>
+         </rect>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>381</width>
+           <height>231</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="layout"/>
+        </widget>
+       </widget>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="button_save">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="styleSheet">
         <string notr="true">QPushButton {
 background-color: rgb(70, 130, 180);
@@ -49,7 +81,7 @@ background-color: rgb(100, 152, 195);
 }
 
 QPushButton:pressed {
-background-color: rgba(70, 130, 180 90);
+background-color: rgba(70, 130, 180, 90);
 }</string>
        </property>
        <property name="text">

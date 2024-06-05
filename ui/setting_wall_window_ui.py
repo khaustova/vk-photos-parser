@@ -15,26 +15,28 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QComboBox, QDialog, QFrame,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QVBoxLayout, QWidget)
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(333, 165)
+        Dialog.resize(333, 166)
         Dialog.setStyleSheet(u"background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(225, 233, 251, 255), stop:1 rgba(220, 220, 220, 255));")
         self.verticalLayout_2 = QVBoxLayout(Dialog)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.verticalLayout = QVBoxLayout()
+        self.wall_frame = QFrame(Dialog)
+        self.wall_frame.setObjectName(u"wall_frame")
+        self.verticalLayout = QVBoxLayout(self.wall_frame)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.label_define_count = QLabel(Dialog)
+        self.label_define_count = QLabel(self.wall_frame)
         self.label_define_count.setObjectName(u"label_define_count")
 
         self.verticalLayout.addWidget(self.label_define_count)
 
-        self.label_count = QLabel(Dialog)
+        self.label_count = QLabel(self.wall_frame)
         self.label_count.setObjectName(u"label_count")
         self.label_count.setStyleSheet(u"font-weight: bold;\n"
 "font-size: 11pt;")
@@ -42,12 +44,12 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.label_count)
 
-        self.label_select_photo = QLabel(Dialog)
+        self.label_select_photo = QLabel(self.wall_frame)
         self.label_select_photo.setObjectName(u"label_select_photo")
 
         self.verticalLayout.addWidget(self.label_select_photo)
 
-        self.combo_box_select_photos = QComboBox(Dialog)
+        self.combo_box_select_photos = QComboBox(self.wall_frame)
         self.combo_box_select_photos.addItem("")
         self.combo_box_select_photos.addItem("")
         self.combo_box_select_photos.addItem("")
@@ -56,13 +58,14 @@ class Ui_Dialog(object):
 "font-size: 10pt;\n"
 "padding: 5px;\n"
 "selection-background-color: transparent;\n"
+"height: 21px;\n"
 "}\n"
 "")
         self.combo_box_select_photos.setFrame(True)
 
         self.verticalLayout.addWidget(self.combo_box_select_photos)
 
-        self.line_edit_count = QLineEdit(Dialog)
+        self.line_edit_count = QLineEdit(self.wall_frame)
         self.line_edit_count.setObjectName(u"line_edit_count")
         self.line_edit_count.setEnabled(False)
         self.line_edit_count.setMinimumSize(QSize(0, 21))
@@ -71,6 +74,7 @@ class Ui_Dialog(object):
 "background-color: white;\n"
 "border: 1px solid black;\n"
 "padding: 1px;\n"
+"height: 21px;\n"
 "}\n"
 "\n"
 "QLineEdit::focus {\n"
@@ -90,8 +94,9 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.line_edit_count)
 
-        self.button_save = QPushButton(Dialog)
+        self.button_save = QPushButton(self.wall_frame)
         self.button_save.setObjectName(u"button_save")
+        self.button_save.setCursor(QCursor(Qt.PointingHandCursor))
         self.button_save.setStyleSheet(u"QPushButton {\n"
 "background-color: rgb(70, 130, 180);\n"
 "color: white;\n"
@@ -104,13 +109,13 @@ class Ui_Dialog(object):
 "}\n"
 "\n"
 "QPushButton:pressed {\n"
-"background-color: rgba(70, 130, 180 90);\n"
+"background-color: rgba(70, 130, 180, 90);\n"
 "}")
 
         self.verticalLayout.addWidget(self.button_save)
 
 
-        self.verticalLayout_2.addLayout(self.verticalLayout)
+        self.verticalLayout_2.addWidget(self.wall_frame)
 
 
         self.retranslateUi(Dialog)

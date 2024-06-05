@@ -6,30 +6,32 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>232</height>
+    <width>439</width>
+    <height>252</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>390</width>
-    <height>232</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>390</width>
-    <height>236</height>
+    <width>3900</width>
+    <height>2410</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:0, y2:0, stop:0 rgba(225, 233, 251, 255), stop:1 rgba(220, 220, 220, 255));</string>
+   <string notr="true">background-color: #edeef0;
+font-family: Arial;
+font-size: 12px;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_5">
+   <layout class="QVBoxLayout" name="verticalLayout_9">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -43,403 +45,726 @@
      <number>6</number>
     </property>
     <property name="bottomMargin">
-     <number>4</number>
+     <number>6</number>
     </property>
     <item>
-     <widget class="QFrame" name="params_frame">
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QPushButton" name="button_add_token">
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-background-color: rgba(255, 255, 255, 80);
-border: 1px solid black;
-padding: 3px 3px;
-height: 17px;
-}
+     <widget class="QTabWidget" name="params_tabWidget">
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane {
+  border: 1px solid lightgray;
+  top:-1px; 
+  background: rgb(245, 245, 245); 
+} 
 
-QPushButton:hover {
-background-color: rgba(255, 255, 255, 40);
-}
+QTabBar::tab {
+  background: rgb(230, 230, 230); 
+  border: 1px solid lightgray; 
+  padding: 3px 15px;
+} 
 
-QPushButton:pressed {
-background-color: rgba(255, 255, 255, 70);
+QTabBar::tab:selected { 
+  background: white; 
+  margin-bottom: -1px; 
 }</string>
-           </property>
-           <property name="text">
-            <string>Добавить токен</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_token_info">
-           <property name="styleSheet">
-            <string notr="true">background-color: transparent;</string>
-           </property>
-           <property name="text">
-            <string>Токен не действителен</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <item>
-          <widget class="QLabel" name="label_group_id">
-           <property name="styleSheet">
-            <string notr="true">background-color: transparent;
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="params_tabWidgetPage1" native="true">
+       <property name="styleSheet">
+        <string notr="true">border: none;
+background: white;</string>
+       </property>
+       <attribute name="title">
+        <string>Фотографии</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <property name="leftMargin">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>6</number>
+        </property>
+        <property name="rightMargin">
+         <number>6</number>
+        </property>
+        <property name="bottomMargin">
+         <number>6</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="label_group_id">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
 padding-right: 2px;</string>
-           </property>
-           <property name="text">
-            <string>Введите ID группы:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="line_edit_group_id">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>21</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QLineEdit {
+            </property>
+            <property name="text">
+             <string>Введите ID группы:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="line_edit_group_id">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QLineEdit {
 background-color: white;
-border: 1px solid black;
+border: 1px solid #d3d9de;
+border-radius: 3px;
 padding: 1px;
+height: 21px;
 }
 
 QLineEdit::focus {
-background-color: white;
-border: 1px solid rgb(21, 148, 194);
-padding: 1px;
+border: 1px solid #d3d9de;
 }
 
 </string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_6">
-         <property name="spacing">
-          <number>6</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label_select_sources">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: transparent;
-padding-top: 1px;
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_select_sources">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
+padding-top: 2px;
 width: 210px;</string>
-           </property>
-           <property name="text">
-            <string>Выберите и настройте источники фотографий:</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <property name="spacing">
-            <number>2</number>
-           </property>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QCheckBox" name="check_box_wall">
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: transparent;</string>
-               </property>
-               <property name="text">
-                <string>Стена</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="button_setting_wall">
-               <property name="maximumSize">
-                <size>
-                 <width>24</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-background-color: rgba(255, 255, 255, 80);
-border: 1px solid black;
-padding: 3px 3px;
+            </property>
+            <property name="text">
+             <string>Выберите и настройте источники фотографий:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <property name="spacing">
+             <number>2</number>
+            </property>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QCheckBox" name="check_box_wall">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QCheckBox{ 
+ background-color: transparent;
+}
+QCheckBox::indicator {
+border: 1px solid #d3d9de;
+border-radius: 3px;
+width: 15px;
+height: 15px;
+}
+QCheckBox::indicator:checked {
+border: 1px solid #d3d9de;
+color: white;
+background-color: #5181b8;
+image: url(:/icon/icons/check.png);
+}
+
+QCheckBox::indicator:checked::indicator {
+color: white;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Стена</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>11</width>
+                  <height>16</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="button_wall_settings">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+background-color: #ebf2fa;
+color: 3770b1;
+border: none;
+font-weight: bold;
+padding: 3px;
+border-radius: 3px;
 }
 
 QPushButton:hover {
-background-color: rgba(255, 255, 255, 40);
+background-color: #dfeaf6;
 }
 
 QPushButton:pressed {
-background-color: rgba(255, 255, 255, 70);
+background-color: #d5e2f1;
 }</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="icons.qrc">
-                 <normaloff>:/icon/icons/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg</normaloff>:/icon/icons/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_4">
-             <item>
-              <widget class="QCheckBox" name="check_box_album">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="sizeIncrement">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="baseSize">
-                <size>
-                 <width>0</width>
-                 <height>0</height>
-                </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">background-color: transparent;</string>
-               </property>
-               <property name="text">
-                <string>Альбомы</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="button_setting_album">
-               <property name="maximumSize">
-                <size>
-                 <width>24</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="cursor">
-                <cursorShape>PointingHandCursor</cursorShape>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QPushButton {
-background-color: rgba(255, 255, 255, 80);
-border: 1px solid black;
-padding: 3px 3px;
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="icons.qrc">
+                  <normaloff>:/icon/icons/settings.svg</normaloff>:/icon/icons/settings.svg</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QCheckBox" name="check_box_album">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="sizeIncrement">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="baseSize">
+                 <size>
+                  <width>0</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QCheckBox{ 
+ background-color: transparent;
+}
+QCheckBox::indicator {
+border: 1px solid #d3d9de;
+border-radius: 3px;
+width: 15px;
+height: 15px;
+}
+QCheckBox::indicator:checked {
+border: 1px solid #d3d9de;
+color: white;
+background-color: #5181b8;
+image: url(:/icon/icons/check.png);
+}
+
+QCheckBox::indicator:checked::indicator {
+color: white;
+}</string>
+                </property>
+                <property name="text">
+                 <string>Альбомы</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="button_album_settings">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+background-color: #ebf2fa;
+color: 3770b1;
+border: none;
+font-weight: bold;
+padding: 3px;
+height: 20px;
+border-radius: 3px;
 }
 
 QPushButton:hover {
-background-color: rgba(255, 255, 255, 40);
+background-color: #dfeaf6;
 }
 
 QPushButton:pressed {
-background-color: rgba(255, 255, 255, 70);
+background-color: #d5e2f1;
 }</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-               <property name="icon">
-                <iconset resource="icons.qrc">
-                 <normaloff>:/icon/icons/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg</normaloff>:/icon/icons/settings_24dp_FILL0_wght400_GRAD0_opsz24.svg</iconset>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
-         <item>
-          <widget class="QLabel" name="label_select_path">
-           <property name="styleSheet">
-            <string notr="true">background-color: transparent;
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="icons.qrc">
+                  <normaloff>:/icon/icons/settings.svg</normaloff>:/icon/icons/settings.svg</iconset>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_select_path">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;
 padding-right: 2px;</string>
-           </property>
-           <property name="text">
-            <string>Выберите папку для загрузки:</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_5">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLineEdit" name="line_edit_select_path">
-             <property name="enabled">
-              <bool>false</bool>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>21</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QLineEdit {
+            </property>
+            <property name="text">
+             <string>Выберите папку для загрузки:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="line_edit_select_path">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
 background-color: white;
-border: 1px solid black;
+border: 1px solid #d3d9de;
 border-right: none;
 padding: 1px;
 height: 21px;
-}</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="button_select_path">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="baseSize">
-              <size>
-               <width>2</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton {
-background-color: rgba(255, 255, 255, 80);
-border: 1px solid black;
-padding: 3px;
-height: 17px;
-width: 55px;
+border-radius: 3px;
+border-top-right-radius: none;
+}
+
+QLineEdit::disabled {
+color: black;
+}
+</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_select_path">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>2</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+background-color: #ebf2fa;
+color: #3770b1;
+font-weight: bold;
+border: none;
+padding: 1px;
+height: 21px;
+width: 70px;
+padding: 2px;
+border-radius: 3px;
+border-top-left-radius: none;
 }
 
 QPushButton:hover {
-background-color: rgba(255, 255, 255, 40);
+background-color: #dfeaf6;
 }
 
 QPushButton:pressed {
-background-color: rgba(255, 255, 255, 70);
+background-color: #d5e2f1;
 }</string>
-             </property>
-             <property name="text">
-              <string>Выбрать</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QPushButton" name="button_parse">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-background-color: rgb(70, 130, 180);
+              </property>
+              <property name="text">
+               <string>Выбрать</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QPushButton" name="button_parse">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+background-color: #0077FF;
 color: white;
-border: 1px solid black;
-padding: 3px 3px;
-height: 17px;
+border: none;
+font-weight: bold;
+padding: 3px;
+margin-top: 3px;
+height: 20px;
+border-radius: 3px;
 }
 
 QPushButton:hover {
-background-color: rgb(100, 152, 195);
+background-color: #1a85ff;
 }
 
 QPushButton:pressed {
-background-color: rgba(70, 130, 180, 90);
+background-color: #5181b8;
 }</string>
-           </property>
-           <property name="text">
-            <string>Скачать</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="label_info">
-           <property name="styleSheet">
-            <string notr="true">background-color: transparent;</string>
-           </property>
-           <property name="text">
-            <string>Заполните все поля и нажмите кнопку «Скачать»</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
+            </property>
+            <property name="text">
+             <string>Скачать</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_info">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Подсказка: заполните все поля и нажмите кнопку «Скачать»</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <property name="styleSheet">
+        <string notr="true">border: none;
+background: white;</string>
+       </property>
+       <attribute name="title">
+        <string>Авторизация</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="leftMargin">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>6</number>
+        </property>
+        <property name="rightMargin">
+         <number>6</number>
+        </property>
+        <property name="bottomMargin">
+         <number>6</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="label_token_info">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Токен не действителен</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="line_edit_token">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+background-color: white;
+border: 1px solid #d3d9de;
+border-right: none;
+padding: 1px;
+height: 21px;
+border-radius: 3px;
+border-top-right-radius: none;
+}
+
+QLineEdit::disabled {
+color: black;
+}
+</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_save">
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+background-color: #0077FF;
+color: white;
+font-weight: bold;
+border: none;
+padding: 1px;
+height: 21px;
+width: 150px;
+padding: 2px;
+border-radius: 3px;
+border-top-left-radius: none;
+}
+
+QPushButton:hover {
+background-color: #1a85ff;
+}
+
+QPushButton:pressed {
+background-color: #5181b8;
+}</string>
+              </property>
+              <property name="text">
+               <string>Сохранить токен</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="styleSheet">
+             <string notr="true">font-weight: bold;</string>
+            </property>
+            <property name="text">
+             <string>Для получения нового токена:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="spacing">
+             <number>7</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_step_1">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>1. Откройте страницу управления приложениями.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_step_4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>2. Если приложение ещё не создано, то создайте его.</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>3. Введите ID приложения в поле ниже и перейдите по ссылке.</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="line_edit_client_id">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>21</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit {
+background-color: white;
+border: 1px solid #d3d9de;
+border-right: none;
+padding: 1px;
+height: 21px;
+border-radius: 3px;
+border-top-right-radius: none;
+}
+
+QLineEdit::disabled {
+color: black;
+}
+</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="button_get_token">
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+background-color: #ebf2fa;
+color: #3770b1;
+font-weight: bold;
+border: none;
+padding: 1px;
+height: 21px;
+width: 150px;
+padding: 2px;
+border-radius: 3px;
+border-top-left-radius: none;
+}
+
+QPushButton:hover {
+background-color: #dfeaf6;
+}
+
+QPushButton:pressed {
+background-color: #d5e2f1;
+}</string>
+              </property>
+              <property name="text">
+               <string>Перейти по ссылке</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_step_5">
+            <property name="text">
+             <string>4. Скопируйте значение параметра access_token из адресной строки.</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>

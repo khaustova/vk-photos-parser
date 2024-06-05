@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>333</width>
-    <height>165</height>
+    <height>166</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,90 +18,93 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="label_define_count">
-       <property name="text">
-        <string>Общее количество фотографий на стене группы:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_count">
-       <property name="styleSheet">
-        <string notr="true">font-weight: bold;
+    <widget class="QFrame" name="wall_frame">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label_define_count">
+        <property name="text">
+         <string>Общее количество фотографий на стене группы:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_count">
+        <property name="styleSheet">
+         <string notr="true">font-weight: bold;
 font-size: 11pt;</string>
-       </property>
-       <property name="text">
-        <string>100</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_select_photo">
-       <property name="text">
-        <string>Определите  количество загружаемых фотографий:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="combo_box_select_photos">
-       <property name="styleSheet">
-        <string notr="true">QComboBox {
+        </property>
+        <property name="text">
+         <string>100</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_select_photo">
+        <property name="text">
+         <string>Определите  количество загружаемых фотографий:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="combo_box_select_photos">
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
 font-size: 10pt;
 padding: 5px;
 selection-background-color: transparent;
+height: 21px;
 }
 </string>
-       </property>
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <property name="frame">
-        <bool>true</bool>
-       </property>
-       <item>
-        <property name="text">
-         <string>Все</string>
         </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Последние</string>
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Первые</string>
+        <property name="frame">
+         <bool>true</bool>
         </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="line_edit_count">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>21</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>21</height>
-        </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QLineEdit {
+        <item>
+         <property name="text">
+          <string>Все</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Последние</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Первые</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="line_edit_count">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>21</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
 background-color: white;
 border: 1px solid black;
 padding: 1px;
+height: 21px;
 }
 
 QLineEdit::focus {
@@ -118,13 +121,16 @@ border: 1px solid rgba(0, 0, 0, 60)
 
 
 </string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="button_save">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="button_save">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
 background-color: rgb(70, 130, 180);
 color: white;
 border: 1px solid black;
@@ -136,15 +142,16 @@ background-color: rgb(100, 152, 195);
 }
 
 QPushButton:pressed {
-background-color: rgba(70, 130, 180 90);
+background-color: rgba(70, 130, 180, 90);
 }</string>
-       </property>
-       <property name="text">
-        <string>Сохранить</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+        </property>
+        <property name="text">
+         <string>Сохранить</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>
