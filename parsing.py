@@ -3,6 +3,7 @@ import ssl
 import json
 import requests
 import webbrowser
+import urllib.request
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -35,9 +36,9 @@ class Parser:
             
         return str(total)
         
-    def check_token_url(self):
+    def check_token_url(self, token):
         params = {
-            "access_token": self.token,
+            "access_token": token,
             "count": 1,
             "v": "5.236",
         }
@@ -62,13 +63,24 @@ class Parser:
         content = json.loads(response.content)
         return True if content.get("response") else False
     
-    def get_photos(self, group_id, album_id, count, offset):
-        photos = self.vk.photos.get(
-            owner_id=-group_id, 
-            album_id=album_id, 
-            photo_sizes=1, 
-            count=count, 
-            offset=offset)
+    def get_photos(self, group_id, album_id, count=None, offset=0):
+        parsed_photos = []
+        target = int(self.get_total_photos(group_id)) if not count else int(count)   
+        count = 1000 if target > 1000 else count
+        offset = offset if offset else 0
+
+        while True:
+            photos = self.vk.photos.get(
+                owner_id=-group_id, 
+                album_id=album_id, 
+                photo_sizes=1, 
+                count=count, 
+                offset=offset)
+            parsed_photos.extend(photos)
+            offset += 1000
+            
+            if target <= offset:
+                break
 
         return photos
     
@@ -87,6 +99,19 @@ class Parser:
             num += 1
 
         return albums
+    
+    @staticmethod
+    def save_photos(photos, path, step, thread):
+        num = 1
+        for photo in photos["items"]:
+            max_size_photo = sorted(photo["sizes"], key=lambda dict: dict["height"])
+            url = max_size_photo[-1]["url"]
+            name = f"{path}/{num}.jpg" 
+            urllib.request.urlretrieve(url, name)
+            num += 1
+            step += 1
+            thread.progress_signal.emit(step)
+        return step
 
 
 

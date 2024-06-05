@@ -6,7 +6,7 @@ from connection import Connection
 from parsing import Parser
 from parsing_thread import ParserThread
 from ui.main_window_ui import Ui_MainWindow
-from ui import change_token_window_ui, setting_album_window_ui, setting_wall_window_ui
+from ui import setting_album_window_ui, setting_wall_window_ui
 
 
 class MainWindow(QMainWindow):
@@ -23,7 +23,8 @@ class MainWindow(QMainWindow):
             "type": "Все", 
             "count": "", 
         }
-        self.checked_albums = []
+        self.checked_albums = {}
+        self.albums_size = 0
         self.total_count = 0
         
         self.ui = Ui_MainWindow()
@@ -36,7 +37,16 @@ class MainWindow(QMainWindow):
             lambda: self.change_settings_button_state(self.ui.check_box_album, self.ui.button_album_settings)
         )
         
-        self.ui.button_add_token.clicked.connect(self.open_token_window)
+        self.ui.line_edit_token.setText(self.conn.get_token())
+        self.ui.line_edit_client_id.setText(self.conn.get_client_id())
+        
+        app_url = '1. Перейдите на <a href=\"https://dev.vk.com/ru/admin/apps-list\" style="color:blue">страницу управления приложениями</a>.'
+        self.ui.label_step_1.setText(app_url)
+        self.ui.label_step_1.setOpenExternalLinks(True)
+
+        self.ui.button_get_token.clicked.connect(lambda: self.parser.get_token_url(self.token_ui.line_edit_client_id))
+        self.ui.button_save.clicked.connect(self.save_token_data)
+        
         self.ui.button_wall_settings.clicked.connect(self.open_wall_settings_window)
         self.ui.button_album_settings.clicked.connect(self.open_album_settings_window)
         self.ui.button_select_path.clicked.connect(self.select_path)
@@ -53,38 +63,19 @@ class MainWindow(QMainWindow):
             button.setEnabled(True)
         else:
             button.setEnabled(False)
-
-    def open_token_window(self):
-        """ Открывает окно настройки токена
-        """
-        
-        self.token_window = QtWidgets.QDialog()
-        self.token_ui = change_token_window_ui.Ui_Dialog()
-        self.token_ui.setupUi(self.token_window)
-        self.token_window.show()
-        
-        self.token_ui.line_edit_token.setText(self.conn.get_token())
-        self.token_ui.line_edit_client_id.setText(self.conn.get_client_id())
-        
-        app_url = '1. Перейдите на <a href=\"https://dev.vk.com/ru/admin/apps-list\" style="color:blue">страницу управления приложениями</a>.'
-        self.token_ui.label_step_1.setText(app_url)
-        self.token_ui.label_step_1.setOpenExternalLinks(True)
-        
-        self.token_ui.button_get_token.clicked.connect(lambda: self.parser.get_token_url(self.token_ui.line_edit_client_id))
-        self.token_ui.button_save.clicked.connect(self.save_token_data)
         
     def check_token(self):
         """ Проверяет действительность токена и выводит соответствующее сообщение
         Для проверки токена делается тестовый запрос к VK API
         """
-        
-        is_true_token = self.parser.check_token_url()
+        is_true_token = self.parser.check_token_url(self.token)
         
         if is_true_token:
-            self.ui.label_token_info.setText("\u2713 Токен действителен")
+            self.parser = Parser(self.token)
+            self.ui.label_token_info.setText("\u2714\uFE0F Токен действителен")
             self.ui.label_token_info.setStyleSheet("color: green")
         else:
-            self.ui.label_token_info.setText("\u2717 Токен не действителен!")
+            self.ui.label_token_info.setText("\u274C Токен не действителен!")
             self.ui.label_token_info.setStyleSheet("color: red")
             
     def save_token_data(self):
@@ -93,13 +84,13 @@ class MainWindow(QMainWindow):
         После сохранения токен проверяется на действительность
         """
         
-        client_id = self.token_ui.line_edit_client_id.text()
-        self.token = self.token_ui.line_edit_token.text()
+        client_id = self.ui.line_edit_client_id.text()
+        self.token = self.ui.line_edit_token.text()
         self.conn.update_client_id(client_id)
         self.conn.update_token(self.token)
         
-        self.token_window.close()
         self.check_token()
+
         
     def select_path(self):
         """ Открывает окно выбора папки для загрузки изображений
@@ -238,8 +229,11 @@ class MainWindow(QMainWindow):
     def save_albums_settins(self, checkboxes, albums):
         for checkbox in checkboxes:
             if checkbox.isChecked():
-                self.checked_albums.append(albums[checkbox.text()]["id"])
-            self.album_window.close()
+                self.checked_albums[albums[checkbox.text()]["id"]] = albums[checkbox.text()]["title"]
+                self.albums_size += albums[checkbox.text()]["size"]
+            
+        print(self.checked_albums)
+        self.album_window.close()
             
     def parse_photos(self):
         """ Парсит изображения в соответствии с переданными параметрами
@@ -250,20 +244,25 @@ class MainWindow(QMainWindow):
         token = self.conn.get_token()
         checkbox_wall = self.ui.check_box_wall.isChecked()
         checkbox_album = self.ui.check_box_album.isChecked()
+        checked_albums = self.checked_albums
         total_photos = self.parser.get_total_photos(self.ui.line_edit_group_id)
 
         try:
             count = int(self.wall_photos_count["count"])
         except:
             count = total_photos
+        
+        if checkbox_wall:
+            self.total_count += int(count)
+        if checkbox_album:
+            self.total_count += int(self.albums_size) 
             
-        self.total_count = count
         offset = None
         
         if self.wall_photos_count["type"] == "Последние":
             offset = int(total_photos) - int(count)
   
-        self.parser_thread = ParserThread(checkbox_wall, token, group_id, path, count, offset)
+        self.parser_thread = ParserThread(checkbox_wall, checkbox_album, token, group_id, path, count, offset, checked_albums)
         self.parser_thread.progress_signal.connect(self.update_parsing_info)
         self.parser_thread.finished_signal.connect(self.is_finish_parsing)
         self.parser_thread.start()
@@ -290,7 +289,7 @@ class MainWindow(QMainWindow):
         self.ui.button_parse.clicked.connect(self.parse_photos)
         
     def is_finish_parsing(self):
-        """ Выводит сообщение об успешной окончании загрузки
+        """ Выводит сообщение об успешном окончании загрузки
         """
         
         self.ui.label_info.setText("Загрузка успешно завершена!") 
