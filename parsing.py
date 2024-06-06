@@ -88,15 +88,13 @@ class Parser:
         all_albums = self.vk.photos.getAlbums(owner_id = -group_id)
         
         albums = {}
-        num = 1
         for album in all_albums["items"]:
             each_album = {}
             each_album["id"] = album["id"]
             each_album["title"] = album["title"]
             each_album["size"] = album["size"]
-            name = f"{num}. {each_album.get('title')} ({each_album.get('size')})"  
+            name = f"{each_album.get('title')} ({each_album.get('size')})"  
             albums[name] = each_album
-            num += 1
 
         return albums
     
