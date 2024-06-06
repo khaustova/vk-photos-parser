@@ -6,24 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>433</width>
-    <height>252</height>
+    <width>441</width>
+    <height>241</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>0</width>
-    <height>0</height>
+    <width>441</width>
+    <height>241</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>3900</width>
-    <height>2410</height>
+    <width>441</width>
+    <height>241</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Парсинг фотографий Вконтакте</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #edeef0;
@@ -68,9 +68,9 @@ QTabBar::tab:selected {
 }</string>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
-      <widget class="QWidget" name="page_photos" native="true">
+      <widget class="QWidget" name="page_photos">
        <property name="styleSheet">
         <string notr="true">border: none;
 background: white;</string>
@@ -80,27 +80,30 @@ background: white;</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <property name="spacing">
-         <number>2</number>
+         <number>0</number>
         </property>
         <property name="leftMargin">
-         <number>6</number>
+         <number>10</number>
         </property>
         <property name="topMargin">
-         <number>6</number>
+         <number>10</number>
         </property>
         <property name="rightMargin">
-         <number>6</number>
+         <number>10</number>
         </property>
         <property name="bottomMargin">
-         <number>6</number>
+         <number>0</number>
         </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <property name="spacing">
+           <number>6</number>
+          </property>
           <item>
            <widget class="QLabel" name="label_group_id">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;
-padding-right: 2px;</string>
+padding-right: 4px;</string>
             </property>
             <property name="text">
              <string>Введите ID группы:</string>
@@ -146,7 +149,7 @@ border: 1px solid #d3d9de;
            <number>6</number>
           </property>
           <property name="topMargin">
-           <number>10</number>
+           <number>5</number>
           </property>
           <item>
            <widget class="QLabel" name="label_select_sources">
@@ -158,7 +161,7 @@ border: 1px solid #d3d9de;
             </property>
             <property name="styleSheet">
              <string notr="true">background-color: transparent;
-padding-top: 2px;
+padding-top: 4px;
 width: 210px;</string>
             </property>
             <property name="text">
@@ -179,6 +182,9 @@ width: 210px;</string>
               <property name="spacing">
                <number>0</number>
               </property>
+              <property name="topMargin">
+               <number>5</number>
+              </property>
               <item>
                <widget class="QCheckBox" name="check_box_wall">
                 <property name="maximumSize">
@@ -196,6 +202,7 @@ width: 210px;</string>
 }
 QCheckBox::indicator {
 border: 1px solid #d3d9de;
+margin-right: 5px;
 border-radius: 3px;
 width: 15px;
 height: 15px;
@@ -205,10 +212,6 @@ border: 1px solid #d3d9de;
 color: white;
 background-color: #5181b8;
 image: url(:/icon/icons/check.png);
-}
-
-QCheckBox::indicator:checked::indicator {
-color: white;
 }</string>
                 </property>
                 <property name="text">
@@ -239,7 +242,7 @@ color: white;
                 <property name="styleSheet">
                  <string notr="true">QPushButton {
 background-color: #ebf2fa;
-color: 3770b1;
+color: #3770b1;
 border: none;
 font-weight: bold;
 padding: 3px;
@@ -299,6 +302,7 @@ background-color: #d5e2f1;
 }
 QCheckBox::indicator {
 border: 1px solid #d3d9de;
+margin-right: 5px;
 border-radius: 3px;
 width: 15px;
 height: 15px;
@@ -308,10 +312,6 @@ border: 1px solid #d3d9de;
 color: white;
 background-color: #5181b8;
 image: url(:/icon/icons/check.png);
-}
-
-QCheckBox::indicator:checked::indicator {
-color: white;
 }</string>
                 </property>
                 <property name="text">
@@ -336,11 +336,10 @@ color: white;
                 <property name="styleSheet">
                  <string notr="true">QPushButton {
 background-color: #ebf2fa;
-color: 3770b1;
+color: #3770b1;
 border: none;
 font-weight: bold;
 padding: 3px;
-height: 20px;
 border-radius: 3px;
 }
 
@@ -372,11 +371,15 @@ background-color: #d5e2f1;
           <property name="spacing">
            <number>0</number>
           </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QLabel" name="label_select_path">
             <property name="styleSheet">
              <string notr="true">background-color: transparent;
-padding-right: 2px;</string>
+padding-right: 2px;
+margin-top: -10px;</string>
             </property>
             <property name="text">
              <string>Выберите папку для загрузки:</string>
@@ -518,7 +521,7 @@ background-color: #5181b8;
              <string>Подсказка: заполните все поля и нажмите кнопку «Скачать»</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -539,16 +542,16 @@ background: white;</string>
          <number>0</number>
         </property>
         <property name="leftMargin">
-         <number>6</number>
+         <number>10</number>
         </property>
         <property name="topMargin">
-         <number>6</number>
+         <number>10</number>
         </property>
         <property name="rightMargin">
-         <number>6</number>
+         <number>10</number>
         </property>
         <property name="bottomMargin">
-         <number>6</number>
+         <number>5</number>
         </property>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -558,16 +561,6 @@ background: white;</string>
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <widget class="QLabel" name="label_token_info">
-            <property name="styleSheet">
-             <string notr="true">background-color: transparent;</string>
-            </property>
-            <property name="text">
-             <string>Токен не действителен</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <property name="spacing">
@@ -612,7 +605,7 @@ font-weight: bold;
 border: none;
 padding: 1px;
 height: 21px;
-width: 150px;
+width: 110px;
 padding: 2px;
 border-radius: 3px;
 border-top-left-radius: none;
@@ -627,11 +620,21 @@ background-color: #5181b8;
 }</string>
               </property>
               <property name="text">
-               <string>Сохранить токен</string>
+               <string>Обновить токен</string>
               </property>
              </widget>
             </item>
            </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_token_info">
+            <property name="styleSheet">
+             <string notr="true">background-color: transparent;</string>
+            </property>
+            <property name="text">
+             <string>Токен не действителен</string>
+            </property>
+           </widget>
           </item>
           <item>
            <widget class="QLabel" name="label">
@@ -690,6 +693,9 @@ background-color: #5181b8;
            <layout class="QHBoxLayout" name="horizontalLayout">
             <property name="spacing">
              <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>3</number>
             </property>
             <item>
              <widget class="QLineEdit" name="line_edit_client_id">

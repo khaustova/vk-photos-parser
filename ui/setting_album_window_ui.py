@@ -23,7 +23,9 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(400, 202)
+        Dialog.resize(421, 246)
+        Dialog.setMinimumSize(QSize(421, 246))
+        Dialog.setMaximumSize(QSize(421, 246))
         Dialog.setStyleSheet(u"background-color: #edeef0;\n"
 "font-family: Arial;\n"
 "font-size: 12px;")
@@ -37,7 +39,7 @@ class Ui_Dialog(object):
 "border-radius: 4px;")
         self.verticalLayout_3 = QVBoxLayout(self.albums_frame)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.verticalLayout_3.setContentsMargins(5, 5, 5, 5)
+        self.verticalLayout_3.setContentsMargins(10, 10, 10, 10)
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
@@ -50,7 +52,7 @@ class Ui_Dialog(object):
         self.label_select_albums.setSizePolicy(sizePolicy)
         self.label_select_albums.setStyleSheet(u"margin-top: 5px;\n"
 "height: 12px;")
-        self.label_select_albums.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
+        self.label_select_albums.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_2.addWidget(self.label_select_albums)
 
@@ -121,7 +123,7 @@ class Ui_Dialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 378, 126))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 389, 165))
         self.scrollAreaWidgetContents.setStyleSheet(u"background-color: transparent;")
         self.verticalLayoutWidget = QWidget(self.scrollAreaWidgetContents)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
@@ -170,7 +172,7 @@ class Ui_Dialog(object):
     # setupUi
 
     def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0431\u043e\u0440 \u0430\u043b\u044c\u0431\u043e\u043c\u043e\u0432", None))
+        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043b\u044c\u0431\u043e\u043c\u044b", None))
         self.label_select_albums.setText(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0430\u043b\u044c\u0431\u043e\u043c\u044b \u0434\u043b\u044f \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438:", None))
         self.button_save.setText(QCoreApplication.translate("Dialog", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c", None))
     # retranslateUi

@@ -6,12 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>202</height>
+    <width>421</width>
+    <height>246</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>421</width>
+    <height>246</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>421</width>
+    <height>246</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>Выбор альбомов</string>
+   <string>Выберите альбомы</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color: #edeef0;
@@ -42,16 +54,16 @@ border-radius: 4px;</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="leftMargin">
-       <number>5</number>
+       <number>10</number>
       </property>
       <property name="topMargin">
-       <number>5</number>
+       <number>10</number>
       </property>
       <property name="rightMargin">
-       <number>5</number>
+       <number>10</number>
       </property>
       <property name="bottomMargin">
-       <number>5</number>
+       <number>10</number>
       </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -74,7 +86,7 @@ height: 12px;</string>
            <string>Выберите альбомы для загрузки:</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -151,8 +163,8 @@ QScrollBar::sub-line:horizontal {
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>378</width>
-             <height>126</height>
+             <width>389</width>
+             <height>165</height>
             </rect>
            </property>
            <property name="styleSheet">

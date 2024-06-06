@@ -24,9 +24,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(433, 252)
-        MainWindow.setMinimumSize(QSize(0, 0))
-        MainWindow.setMaximumSize(QSize(3900, 2410))
+        MainWindow.resize(441, 241)
+        MainWindow.setMinimumSize(QSize(441, 241))
+        MainWindow.setMaximumSize(QSize(441, 241))
         MainWindow.setStyleSheet(u"background-color: #edeef0;\n"
 "font-family: Arial;\n"
 "font-size: 12px;")
@@ -59,15 +59,16 @@ class Ui_MainWindow(object):
         self.page_photos.setStyleSheet(u"border: none;\n"
 "background: white;")
         self.verticalLayout_5 = QVBoxLayout(self.page_photos)
-        self.verticalLayout_5.setSpacing(2)
+        self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(6, 6, 6, 6)
+        self.verticalLayout_5.setContentsMargins(10, 10, 10, 0)
         self.horizontalLayout_2 = QHBoxLayout()
+        self.horizontalLayout_2.setSpacing(6)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.label_group_id = QLabel(self.page_photos)
         self.label_group_id.setObjectName(u"label_group_id")
         self.label_group_id.setStyleSheet(u"background-color: transparent;\n"
-"padding-right: 2px;")
+"padding-right: 4px;")
 
         self.horizontalLayout_2.addWidget(self.label_group_id)
 
@@ -97,12 +98,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6 = QHBoxLayout()
         self.horizontalLayout_6.setSpacing(6)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.horizontalLayout_6.setContentsMargins(-1, 10, -1, -1)
+        self.horizontalLayout_6.setContentsMargins(-1, 5, -1, -1)
         self.label_select_sources = QLabel(self.page_photos)
         self.label_select_sources.setObjectName(u"label_select_sources")
         self.label_select_sources.setMinimumSize(QSize(0, 0))
         self.label_select_sources.setStyleSheet(u"background-color: transparent;\n"
-"padding-top: 2px;\n"
+"padding-top: 4px;\n"
 "width: 210px;")
         self.label_select_sources.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
@@ -114,6 +115,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(-1, 5, -1, -1)
         self.check_box_wall = QCheckBox(self.page_photos)
         self.check_box_wall.setObjectName(u"check_box_wall")
         self.check_box_wall.setMaximumSize(QSize(16777215, 16777215))
@@ -123,6 +125,7 @@ class Ui_MainWindow(object):
 "}\n"
 "QCheckBox::indicator {\n"
 "border: 1px solid #d3d9de;\n"
+"margin-right: 5px;\n"
 "border-radius: 3px;\n"
 "width: 15px;\n"
 "height: 15px;\n"
@@ -132,10 +135,6 @@ class Ui_MainWindow(object):
 "color: white;\n"
 "background-color: #5181b8;\n"
 "image: url(:/icon/icons/check.png);\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:checked::indicator {\n"
-"color: white;\n"
 "}")
         self.check_box_wall.setIconSize(QSize(11, 16))
 
@@ -148,7 +147,7 @@ class Ui_MainWindow(object):
         self.button_wall_settings.setCursor(QCursor(Qt.PointingHandCursor))
         self.button_wall_settings.setStyleSheet(u"QPushButton {\n"
 "background-color: #ebf2fa;\n"
-"color: 3770b1;\n"
+"color: #3770b1;\n"
 "border: none;\n"
 "font-weight: bold;\n"
 "padding: 3px;\n"
@@ -185,6 +184,7 @@ class Ui_MainWindow(object):
 "}\n"
 "QCheckBox::indicator {\n"
 "border: 1px solid #d3d9de;\n"
+"margin-right: 5px;\n"
 "border-radius: 3px;\n"
 "width: 15px;\n"
 "height: 15px;\n"
@@ -194,10 +194,6 @@ class Ui_MainWindow(object):
 "color: white;\n"
 "background-color: #5181b8;\n"
 "image: url(:/icon/icons/check.png);\n"
-"}\n"
-"\n"
-"QCheckBox::indicator:checked::indicator {\n"
-"color: white;\n"
 "}")
 
         self.horizontalLayout_4.addWidget(self.check_box_album)
@@ -209,11 +205,10 @@ class Ui_MainWindow(object):
         self.button_album_settings.setCursor(QCursor(Qt.PointingHandCursor))
         self.button_album_settings.setStyleSheet(u"QPushButton {\n"
 "background-color: #ebf2fa;\n"
-"color: 3770b1;\n"
+"color: #3770b1;\n"
 "border: none;\n"
 "font-weight: bold;\n"
 "padding: 3px;\n"
-"height: 20px;\n"
 "border-radius: 3px;\n"
 "}\n"
 "\n"
@@ -240,10 +235,12 @@ class Ui_MainWindow(object):
         self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout.setContentsMargins(-1, 0, -1, -1)
         self.label_select_path = QLabel(self.page_photos)
         self.label_select_path.setObjectName(u"label_select_path")
         self.label_select_path.setStyleSheet(u"background-color: transparent;\n"
-"padding-right: 2px;")
+"padding-right: 2px;\n"
+"margin-top: -10px;")
         self.label_select_path.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
 
         self.verticalLayout.addWidget(self.label_select_path)
@@ -341,7 +338,7 @@ class Ui_MainWindow(object):
         self.label_info = QLabel(self.page_photos)
         self.label_info.setObjectName(u"label_info")
         self.label_info.setStyleSheet(u"background-color: transparent;")
-        self.label_info.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
+        self.label_info.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.verticalLayout_3.addWidget(self.label_info)
 
@@ -356,17 +353,11 @@ class Ui_MainWindow(object):
         self.verticalLayout_7 = QVBoxLayout(self.page_authorization)
         self.verticalLayout_7.setSpacing(0)
         self.verticalLayout_7.setObjectName(u"verticalLayout_7")
-        self.verticalLayout_7.setContentsMargins(6, 6, 6, 6)
+        self.verticalLayout_7.setContentsMargins(10, 10, 10, 5)
         self.verticalLayout_8 = QVBoxLayout()
         self.verticalLayout_8.setSpacing(0)
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.verticalLayout_8.setContentsMargins(-1, -1, -1, 0)
-        self.label_token_info = QLabel(self.page_authorization)
-        self.label_token_info.setObjectName(u"label_token_info")
-        self.label_token_info.setStyleSheet(u"background-color: transparent;")
-
-        self.verticalLayout_8.addWidget(self.label_token_info)
-
         self.horizontalLayout_7 = QHBoxLayout()
         self.horizontalLayout_7.setSpacing(0)
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
@@ -400,7 +391,7 @@ class Ui_MainWindow(object):
 "border: none;\n"
 "padding: 1px;\n"
 "height: 21px;\n"
-"width: 150px;\n"
+"width: 110px;\n"
 "padding: 2px;\n"
 "border-radius: 3px;\n"
 "border-top-left-radius: none;\n"
@@ -418,6 +409,12 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_8.addLayout(self.horizontalLayout_7)
+
+        self.label_token_info = QLabel(self.page_authorization)
+        self.label_token_info.setObjectName(u"label_token_info")
+        self.label_token_info.setStyleSheet(u"background-color: transparent;")
+
+        self.verticalLayout_8.addWidget(self.label_token_info)
 
         self.label = QLabel(self.page_authorization)
         self.label.setObjectName(u"label")
@@ -457,6 +454,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(-1, 3, -1, -1)
         self.line_edit_client_id = QLineEdit(self.page_authorization)
         self.line_edit_client_id.setObjectName(u"line_edit_client_id")
         self.line_edit_client_id.setMinimumSize(QSize(0, 21))
@@ -523,14 +521,14 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.params_tabwidget.setCurrentIndex(1)
+        self.params_tabwidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\u041f\u0430\u0440\u0441\u0438\u043d\u0433 \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0439 \u0412\u043a\u043e\u043d\u0442\u0430\u043a\u0442\u0435", None))
         self.label_group_id.setText(QCoreApplication.translate("MainWindow", u"\u0412\u0432\u0435\u0434\u0438\u0442\u0435 ID \u0433\u0440\u0443\u043f\u043f\u044b:", None))
         self.label_select_sources.setText(QCoreApplication.translate("MainWindow", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0438 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u0442\u0435 \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0438 \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0439:", None))
         self.check_box_wall.setText(QCoreApplication.translate("MainWindow", u"\u0421\u0442\u0435\u043d\u0430", None))
@@ -542,8 +540,8 @@ class Ui_MainWindow(object):
         self.button_parse.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043a\u0430\u0447\u0430\u0442\u044c", None))
         self.label_info.setText(QCoreApplication.translate("MainWindow", u"\u041f\u043e\u0434\u0441\u043a\u0430\u0437\u043a\u0430: \u0437\u0430\u043f\u043e\u043b\u043d\u0438\u0442\u0435 \u0432\u0441\u0435 \u043f\u043e\u043b\u044f \u0438 \u043d\u0430\u0436\u043c\u0438\u0442\u0435 \u043a\u043d\u043e\u043f\u043a\u0443 \u00ab\u0421\u043a\u0430\u0447\u0430\u0442\u044c\u00bb", None))
         self.params_tabwidget.setTabText(self.params_tabwidget.indexOf(self.page_photos), QCoreApplication.translate("MainWindow", u"\u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438", None))
+        self.button_save.setText(QCoreApplication.translate("MainWindow", u"\u041e\u0431\u043d\u043e\u0432\u0438\u0442\u044c \u0442\u043e\u043a\u0435\u043d", None))
         self.label_token_info.setText(QCoreApplication.translate("MainWindow", u"\u0422\u043e\u043a\u0435\u043d \u043d\u0435 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043b\u0435\u043d", None))
-        self.button_save.setText(QCoreApplication.translate("MainWindow", u"\u0421\u043e\u0445\u0440\u0430\u043d\u0438\u0442\u044c \u0442\u043e\u043a\u0435\u043d", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"\u0414\u043b\u044f \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u044f \u043d\u043e\u0432\u043e\u0433\u043e \u0442\u043e\u043a\u0435\u043d\u0430:", None))
         self.label_step_1.setText(QCoreApplication.translate("MainWindow", u"1. \u041e\u0442\u043a\u0440\u043e\u0439\u0442\u0435 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0443 \u0443\u043f\u0440\u0430\u0432\u043b\u0435\u043d\u0438\u044f \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u044f\u043c\u0438.", None))
         self.label_step_4.setText(QCoreApplication.translate("MainWindow", u"2. \u0415\u0441\u043b\u0438 \u043f\u0440\u0438\u043b\u043e\u0436\u0435\u043d\u0438\u0435 \u0435\u0449\u0451 \u043d\u0435 \u0441\u043e\u0437\u0434\u0430\u043d\u043e, \u0442\u043e \u0441\u043e\u0437\u0434\u0430\u0439\u0442\u0435 \u0435\u0433\u043e.", None))
