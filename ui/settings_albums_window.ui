@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Выберите альбомы</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icon/icons/image.png</normaloff>:/icon/icons/image.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: #edeef0;
 font-family: Arial;
@@ -221,6 +225,8 @@ background-color: #5181b8;
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections/>
 </ui>

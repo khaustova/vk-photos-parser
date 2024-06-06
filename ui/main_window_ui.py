@@ -27,6 +27,9 @@ class Ui_MainWindow(object):
         MainWindow.resize(441, 241)
         MainWindow.setMinimumSize(QSize(441, 241))
         MainWindow.setMaximumSize(QSize(441, 241))
+        icon = QIcon()
+        icon.addFile(u":/icon/icons/image.png", QSize(), QIcon.Normal, QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         MainWindow.setStyleSheet(u"background-color: #edeef0;\n"
 "font-family: Arial;\n"
 "font-size: 12px;")
@@ -161,9 +164,9 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {\n"
 "background-color: #d5e2f1;\n"
 "}")
-        icon = QIcon()
-        icon.addFile(u":/icon/icons/settings.svg", QSize(), QIcon.Normal, QIcon.Off)
-        self.button_wall_settings.setIcon(icon)
+        icon1 = QIcon()
+        icon1.addFile(u":/icon/icons/settings.svg", QSize(), QIcon.Normal, QIcon.Off)
+        self.button_wall_settings.setIcon(icon1)
 
         self.horizontalLayout_3.addWidget(self.button_wall_settings)
 
@@ -219,7 +222,7 @@ class Ui_MainWindow(object):
 "QPushButton:pressed {\n"
 "background-color: #d5e2f1;\n"
 "}")
-        self.button_album_settings.setIcon(icon)
+        self.button_album_settings.setIcon(icon1)
 
         self.horizontalLayout_4.addWidget(self.button_album_settings)
 

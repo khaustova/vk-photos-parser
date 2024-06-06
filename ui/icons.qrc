@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="icon">
+    <file>icons/image.png</file>
     <file>icons/keyboard_arrow_down.png</file>
     <file>icons/check.png</file>
     <file>icons/settings.svg</file>

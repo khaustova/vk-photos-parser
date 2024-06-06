@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Выберите количество фотографий</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icon/icons/image.png</normaloff>:/icon/icons/image.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: #edeef0;
 font-family: Arial;
@@ -89,7 +93,7 @@ font-size: 11pt;</string>
       <item>
        <widget class="QLabel" name="label_select_photo">
         <property name="text">
-         <string>Выберите количество загружаемых фотографий:</string>
+         <string>Выберите количество фотографий для загрузки:</string>
         </property>
        </widget>
       </item>

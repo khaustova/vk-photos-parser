@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'setting_album_window.ui'
+## Form generated from reading UI file 'settings_albums_window.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.7.1
 ##
@@ -18,6 +18,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QLabel,
     QPushButton, QScrollArea, QSizePolicy, QVBoxLayout,
     QWidget)
+import ui.icons_rc
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -26,6 +27,9 @@ class Ui_Dialog(object):
         Dialog.resize(421, 246)
         Dialog.setMinimumSize(QSize(421, 246))
         Dialog.setMaximumSize(QSize(421, 246))
+        icon = QIcon()
+        icon.addFile(u":/icon/icons/image.png", QSize(), QIcon.Normal, QIcon.Off)
+        Dialog.setWindowIcon(icon)
         Dialog.setStyleSheet(u"background-color: #edeef0;\n"
 "font-family: Arial;\n"
 "font-size: 12px;")

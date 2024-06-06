@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'setting_wall_window.ui'
+## Form generated from reading UI file 'settings_wall_window.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.7.1
 ##
@@ -27,6 +27,9 @@ class Ui_Dialog(object):
         Dialog.resize(311, 187)
         Dialog.setMinimumSize(QSize(311, 187))
         Dialog.setMaximumSize(QSize(311, 187))
+        icon = QIcon()
+        icon.addFile(u":/icon/icons/image.png", QSize(), QIcon.Normal, QIcon.Off)
+        Dialog.setWindowIcon(icon)
         Dialog.setStyleSheet(u"background-color: #edeef0;\n"
 "font-family: Arial;\n"
 "font-size: 12px;")
@@ -185,7 +188,7 @@ class Ui_Dialog(object):
         Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0439", None))
         self.label_define_count.setText(QCoreApplication.translate("Dialog", u"\u041e\u0431\u0449\u0435\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0439 \u043d\u0430 \u0441\u0442\u0435\u043d\u0435 \u0433\u0440\u0443\u043f\u043f\u044b:", None))
         self.label_count.setText(QCoreApplication.translate("Dialog", u"100", None))
-        self.label_select_photo.setText(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0437\u0430\u0433\u0440\u0443\u0436\u0430\u0435\u043c\u044b\u0445 \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0439:", None))
+        self.label_select_photo.setText(QCoreApplication.translate("Dialog", u"\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u043a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u0444\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0439 \u0434\u043b\u044f \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438:", None))
         self.combo_box_select_photos.setItemText(0, QCoreApplication.translate("Dialog", u"\u0412\u0441\u0435", None))
         self.combo_box_select_photos.setItemText(1, QCoreApplication.translate("Dialog", u"\u041f\u043e\u0441\u043b\u0435\u0434\u043d\u0438\u0435", None))
         self.combo_box_select_photos.setItemText(2, QCoreApplication.translate("Dialog", u"\u041f\u0435\u0440\u0432\u044b\u0435", None))

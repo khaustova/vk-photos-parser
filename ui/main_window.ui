@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Парсинг фотографий Вконтакте</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icon/icons/image.png</normaloff>:/icon/icons/image.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">background-color: #edeef0;
 font-family: Arial;
