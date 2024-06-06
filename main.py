@@ -1,7 +1,8 @@
 import vk_api
 import sys
+from PySide6.QtCore import Qt, QSize
 from PySide6 import QtWidgets, QtCore
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QCheckBox, QScrollArea, QVBoxLayout
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QCheckBox, QScrollArea, QVBoxLayout, QSizePolicy
 from connection import Connection
 from parsing import Parser
 from parsing_thread import ParserThread
@@ -13,7 +14,7 @@ class MainWindow(QMainWindow):
     
     def __init__(self):
         super(MainWindow, self).__init__()
-        
+
         self.conn = Connection()
         self.token = self.conn.get_token()
         
@@ -44,7 +45,7 @@ class MainWindow(QMainWindow):
         self.ui.label_step_1.setText(app_url)
         self.ui.label_step_1.setOpenExternalLinks(True)
 
-        self.ui.button_get_token.clicked.connect(lambda: self.parser.get_token_url(self.token_ui.line_edit_client_id))
+        self.ui.button_get_token.clicked.connect(lambda: self.parser.get_token_url(self.ui.line_edit_client_id))
         self.ui.button_save.clicked.connect(self.save_token_data)
         
         self.ui.button_wall_settings.clicked.connect(self.open_wall_settings_window)
@@ -72,11 +73,13 @@ class MainWindow(QMainWindow):
         
         if is_true_token:
             self.parser = Parser(self.token)
-            self.ui.label_token_info.setText("\u2714\uFE0F Токен действителен")
+            self.ui.label_token_info.setText("\u2705 Токен действителен")
             self.ui.label_token_info.setStyleSheet("color: green")
+            self.ui.params_tabwidget.setTabText(1, "\u2705 Авторизация")
         else:
             self.ui.label_token_info.setText("\u274C Токен не действителен!")
             self.ui.label_token_info.setStyleSheet("color: red")
+            self.ui.params_tabwidget.setTabText(1, "\u274C Авторизация")
             
     def save_token_data(self):
         """ Сохраняет токен и ID приложения в базу данных, при этом в базе 
@@ -199,7 +202,7 @@ class MainWindow(QMainWindow):
             scroll_area.setWidgetResizable(True)
             scroll_area.setWidget(scroll_widget)
             layout = QVBoxLayout(scroll_widget)
-
+            
             checkboxes = []
             num = 1
             for value in checkboxes_albums_list:
@@ -210,11 +213,31 @@ class MainWindow(QMainWindow):
                 if album_id in self.checked_albums:
                     checkbox.setChecked(True)
                 
-                checkbox.setObjectName(f'checkbox_album_{num + 1}')
+                checkbox.setObjectName(f"checkbox_album_{num + 1}")
+                checkbox.setStyleSheet("""
+                    QCheckBox{ 
+                        background-color: transparent;
+                    }
+                    
+                    QCheckBox::indicator {
+                        border: 1px solid #d3d9de;
+                        margin-right: 5px;
+                        border-radius: 3px;
+                        width: 15px;
+                        height: 15px;
+                    }
+                    
+                    QCheckBox::indicator:checked {
+                        border: 1px solid #d3d9de;
+                        color: white;
+                        background-color: #5181b8;
+                        image: url(:/icon/icons/check.png);
+                    }
+                    """)
                 layout.addWidget(checkbox)
                 checkboxes.append(checkbox)
                 num += 1
-                
+            layout.addStretch(1)  
             self.album_ui.button_save.clicked.connect(lambda: self.save_albums_settins(checkboxes, albums))
             
         else:
@@ -225,7 +248,7 @@ class MainWindow(QMainWindow):
             buttons=QMessageBox.Ok,
             defaultButton=QMessageBox.Ok,
         )
-            
+      
     def save_albums_settins(self, checkboxes, albums):
         for checkbox in checkboxes:
             if checkbox.isChecked():
