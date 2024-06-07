@@ -3,9 +3,9 @@ import sys
 from PySide6 import QtWidgets
 
 from connection import Connection
-from parsing import Parser
-from parsing_thread import ParserThread
-from styles import style_parse_button, style_stop_button, style_checkbox
+from services.parsing import Parser
+from services.parsing_thread import ParserThread
+from services.styles import style_parse_button, style_stop_button, style_checkbox
 from ui import main_window_ui, settings_albums_window_ui, settings_wall_window_ui
 
 

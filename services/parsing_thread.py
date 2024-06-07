@@ -3,7 +3,7 @@ import re
 
 from PySide6.QtCore import QThread, Signal
 
-from parsing import Parser
+from services.parsing import Parser
 
 
 class ParserThread(QThread):
