@@ -24,9 +24,9 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(421, 246)
-        Dialog.setMinimumSize(QSize(421, 246))
-        Dialog.setMaximumSize(QSize(421, 246))
+        Dialog.resize(350, 220)
+        Dialog.setMinimumSize(QSize(350, 220))
+        Dialog.setMaximumSize(QSize(350, 220))
         icon = QIcon()
         icon.addFile(u":/icon/icons/image.png", QSize(), QIcon.Normal, QIcon.Off)
         Dialog.setWindowIcon(icon)
@@ -127,7 +127,7 @@ class Ui_Dialog(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 389, 165))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 318, 139))
         self.scrollAreaWidgetContents.setStyleSheet(u"background-color: transparent;")
         self.verticalLayoutWidget = QWidget(self.scrollAreaWidgetContents)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
