@@ -5,6 +5,7 @@ from PySide6 import QtWidgets
 from connection import Connection
 from parsing import Parser
 from parsing_thread import ParserThread
+from styles import style_parse_button, style_stop_button, style_checkbox
 from ui import main_window_ui, settings_albums_window_ui, settings_wall_window_ui
 
 
@@ -217,28 +218,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     checkbox.setChecked(True)
 
                 checkbox.setObjectName(f"checkbox_album_{num + 1}")
-                checkbox.setStyleSheet(
-                    """
-                    QCheckBox{ 
-                        background-color: transparent;
-                    }
-
-                    QCheckBox::indicator {
-                        border: 1px solid #d3d9de;
-                        margin-right: 5px;
-                        border-radius: 3px;
-                        width: 15px;
-                        height: 15px;
-                    }
-
-                    QCheckBox::indicator:checked {
-                        border: 1px solid #d3d9de;
-                        color: white;
-                        background-color: #5181b8;
-                        image: url(:/icon/icons/check.png);
-                    }
-                    """
-                )
+                checkbox.setStyleSheet(style_checkbox)
                 layout.addWidget(checkbox)
                 checkboxes.append(checkbox)
                 num += 1
@@ -312,6 +292,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.parser_thread.start()
 
         self.ui.button_parse.setText("Стоп")
+        self.ui.button_parse.setStyleSheet(style_stop_button)
         self.ui.button_parse.clicked.disconnect(self.parse_photos)
         self.ui.button_parse.clicked.connect(self.stop_parsing)
      
@@ -329,6 +310,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.label_info.setText("Загрузка остановлена!")
 
         self.ui.button_parse.setText("Скачать")
+        self.ui.button_parse.setStyleSheet(style_parse_button)
         self.ui.button_parse.clicked.disconnect(self.stop_parsing)
         self.ui.button_parse.clicked.connect(self.parse_photos)
 
@@ -339,6 +321,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.label_info.setText("Загрузка успешно завершена!")
 
         self.ui.button_parse.setText("Скачать")
+        self.ui.button_parse.setStyleSheet(style_parse_button)
         self.ui.button_parse.clicked.disconnect(self.stop_parsing)
         self.ui.button_parse.clicked.connect(self.parse_photos) 
 
