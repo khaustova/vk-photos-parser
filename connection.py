@@ -16,7 +16,7 @@ class Connection:
         """
 
         db = QtSql.QSqlDatabase.addDatabase("QSQLITE")
-        db.setDatabaseName("parser.db")
+        db.setDatabaseName("data.db")
 
         if not db.open():
             QtWidgets.QMessageBox.critical(

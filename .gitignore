@@ -2,4 +2,5 @@ images
 .venv
 .env
 parser.db
+data.db
 __pycache__
