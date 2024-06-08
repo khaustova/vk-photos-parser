@@ -253,7 +253,32 @@ class MainWindow(QtWidgets.QMainWindow):
     def parse_photos(self):
         """ Парсит фотографии в соответствии с переданными параметрами
         """
-
+        
+        if not self.check_token():
+            self.ui.label_info.setText("Подсказка: пройдите авторизацию и указжите действительный токен")
+            
+            return
+        
+        if not self.parser.check_group_id(self.ui.line_edit_group_id.text()):
+            self.ui.label_info.setText("Подсказка: пожалуйста, введите корректный ID группы")
+            
+            return
+        
+        if not self.ui.line_edit_select_path.text():
+            self.ui.label_info.setText("Подсказка: пожалуйста, выберите путь для загрузки фотографий")
+            
+            return
+        
+        if not self.ui.check_box_wall.isChecked() or self.ui.check_box_album.isChecked():
+            self.ui.label_info.setText("Подсказка: пожалуйста, отметьте и настройте источники фотографий")
+            
+            return
+        
+        if not self.ui.check_box_album.isChecked() and not self.checked_albums:
+            self.ui.label_info.setText("Подсказка: пожалуйста, выберите альбомы для загрузки")
+            
+            return
+        
         path = self.ui.line_edit_select_path.text()
         group_id = int(self.ui.line_edit_group_id.text())
         token = self.conn.get_token()
