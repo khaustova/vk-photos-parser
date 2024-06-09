@@ -59,11 +59,15 @@ class Parser:
             thread.progress_signal.emit(step)
         return step
 
-    def get_total_photos(self, line_edit_group_id: QtWidgets.QLineEdit, album_id="wall") -> str:
+    def get_total_photos(self, group_id: QtWidgets.QLineEdit | int, album_id="wall") -> str:
         """ Возвращает общее количество фотографий на стене или в альбоме
         """
-
-        owner_id = int(line_edit_group_id.text())
+        
+        try:
+            owner_id = int(group_id.text())
+        except AttributeError:
+            owner_id = int(group_id)
+            
         total = self.vk.photos.get(owner_id=-owner_id, album_id=album_id, count=0)["count"]
 
         return str(total)
@@ -113,8 +117,8 @@ class Parser:
         """
 
         parsed_photos = []
-        target = int(self.get_total_photos(group_id)) if not count else int(count)
-        count = 1000 if target > 1000 else count
+        target = int(self.get_total_photos(group_id, album_id)) if not count else int(count)
+        count = 1000 if target > 1000 else target
         offset = offset if offset else 0
 
         while True:

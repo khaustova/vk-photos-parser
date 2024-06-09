@@ -68,7 +68,7 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             button.setEnabled(False)
 
-    def check_token(self):
+    def check_token(self) -> bool:
         """ Проверяет действительность токена и выводит соответствующее сообщение
         Для проверки токена делается тестовый запрос к VK API
         """
@@ -84,6 +84,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.ui.label_token_info.setText("\u274C Токен не действителен!")
             self.ui.label_token_info.setStyleSheet("color: red")
             self.ui.params_tabwidget.setTabText(1, "\u274C Авторизация")
+            
+        return is_true_token
  
     def save_token_data(self):
         """ Сохраняет токен и ID приложения в базу данных, при этом в базе
@@ -242,7 +244,8 @@ class MainWindow(QtWidgets.QMainWindow):
         альбомов, и увеличивает величину атрибута albums_size на общее количество
         фотофий в выбранных альбомах
         """
-
+        
+        self.albums_size = 0
         for checkbox in checkboxes:
             if checkbox.isChecked():
                 self.checked_albums[albums[checkbox.text()]["id"]] = albums[checkbox.text()]["title"]
@@ -253,12 +256,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def parse_photos(self):
         """ Парсит фотографии в соответствии с переданными параметрами
         """
-        
-        if not self.check_token():
-            self.ui.label_info.setText("Подсказка: пройдите авторизацию и указжите действительный токен")
-            
-            return
-        
+         
         if not self.parser.check_group_id(self.ui.line_edit_group_id.text()):
             self.ui.label_info.setText("Подсказка: пожалуйста, введите корректный ID группы")
             
@@ -269,13 +267,18 @@ class MainWindow(QtWidgets.QMainWindow):
             
             return
         
-        if not self.ui.check_box_wall.isChecked() or self.ui.check_box_album.isChecked():
+        if not self.ui.check_box_wall.isChecked() and not self.ui.check_box_album.isChecked():
             self.ui.label_info.setText("Подсказка: пожалуйста, отметьте и настройте источники фотографий")
             
             return
         
-        if not self.ui.check_box_album.isChecked() and not self.checked_albums:
+        if self.ui.check_box_album.isChecked() and not self.checked_albums:
             self.ui.label_info.setText("Подсказка: пожалуйста, выберите альбомы для загрузки")
+            
+            return
+        
+        if not self.check_token():
+            self.ui.label_info.setText("Подсказка: пройдите авторизацию и укажите действительный токен")
             
             return
         
@@ -285,22 +288,23 @@ class MainWindow(QtWidgets.QMainWindow):
         checkbox_wall = self.ui.check_box_wall.isChecked()
         checkbox_album = self.ui.check_box_album.isChecked()
         checked_albums = self.checked_albums
-        total_photos = self.parser.get_total_photos(self.ui.line_edit_group_id)
+        total_photos = int(self.parser.get_total_photos(self.ui.line_edit_group_id))
 
         try:
             count = int(self.wall_photos_count["count"])
         except ValueError:
             count = total_photos
-
+            
+        self.total_count = 0
         if checkbox_wall:
-            self.total_count += int(count)
+            self.total_count += count
         if checkbox_album:
-            self.total_count += int(self.albums_size) 
+            self.total_count += self.albums_size
 
         offset = None
 
         if self.wall_photos_count["type"] == "Последние":
-            offset = int(total_photos) - int(count)
+            offset = total_photos - count
 
         self.parser_thread = ParserThread(
             checkbox_wall,
