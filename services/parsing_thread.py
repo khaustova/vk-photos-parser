@@ -49,7 +49,7 @@ class ParserThread(QThread):
             for album_id, title in self.checked_albums.items():
                 title = re.sub(r"[^\s\w]", " ", title)
                 title = re.sub(r"\s+", " ", title)
-                album_path = os.path.join(self.path, title)
+                album_path = self.path + "/" + title.strip()
                 os.makedirs(album_path, exist_ok=True)
 
                 photos = self.parser.get_photos(group_id=self.group_id, album_id=album_id)
